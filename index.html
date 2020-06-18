@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+    <title>Wallet</title>
+</head>
+<body>
+  <!-- No wallet -->
+  <header >
+    <nav class="navbar navbar-light bg-dark p-0" >
+        <h2 class="navbar-brand p-3 "id="h2-Tcolor"  >Wallet</h2>
+        <div class="dropdown p-3 ">
+            <button class="btn p-1 btn-info dropdown-toggle d-none" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown button
+            </button>
+            <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+        </div>
+    </nav>
+  </header>
+
+  <div class="container-fluid">
+    <div class="row ">
+        <div class="col  d-flex justify-content-center  my-5 ghost-image-div ">
+            <img src="image/video-game.png" class="image-ghost">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col text-center" >
+            <h2>Ooops!</h2>
+            <p>you have no wallets.start by creating one</p>
+            <button type="button" class="btn btn-info p-2 m-3" id="myInput">Create wallet</button>
+        </div>
+    </div>
+
+  </div>
+    <!-- Create wallet modal -->
+  <div class="container" id="modal-container">
+    <div class="modal p-3" tabindex="-1" role="dialog" id="myModal">
+      <div class="modal-dialog centering-modal" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title p-2">Create new wallet</h5>
+            <button type="button" class="close p-2" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="modal-form">
+              <div class="form-group">
+                <label for="exampleInputName">Name :</label>
+                <input type="text" value="" class="form-control p-2" id="exampleInputName" >
+              </div>
+
+                <label >Currency :</label>
+                <div class="radio">
+                  <Label><input type="radio"class="m-1" name="optradio" value="US Dollars ($)" id="exampleInputCurrency1">US Dollars ($)</Label>
+                </div>
+                <div class="radio">
+                  <label><input type="radio" class="m-1" name="optradio" value="Iraqi Dinar (IQD)" id="exampleInputCurrency2">Iraqi Dinars (IQD)</label>
+                </div>
+                
+              <div class="form-group">
+                <label for="exampleInputBalance">Balance :</label>
+                <input type="number" class="form-control p-2" id="exampleInputBalance" placeholder="0">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputDescription">Description :</label>
+                <input type="text" class="form-control p-2" id="exampleInputDescription" >
+              </div>
+            </form>
+            
+          </div>
+          <div class="modal-footer ">
+            <button type="button" data-dismiss="modal" class="btn btn-secondary p-2 m-2"id="close" >Close</button>
+            <button type="button" class="btn btn-info p-2 m-2" id="create">Create Wallet</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- wallet view -->
+  <div class="container hiding">
+    <h1 style="margin: 50px 0px;">Wallet Balance: $0.00</h1>
+
+    <form name="formName">
+        <div class="form-row">
+
+          <div class="col-md-4 mb-4">
+            <label for="makeTransaction">Make a transaction:</label>
+            <div class="input-group">
+                <input type="number" class="form-control" id="make-transaction" placeholder="Select Money" required>
+                <div class="input-group-append">
+                    <span class="input-group-text">$</span>
+                    <span class="input-group-text">0.00</span>
+                  </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-3" style="margin:30px 0 0 !important;">
+            <div class="input-group-prepend">
+              <button class="form-control btn btn-outline-success " type="button">Income</button>
+              <button class="form-control btn btn-outline-danger" type="button">Expense</button>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+            <div class="col-md-4 mb-3">
+              <label for="transactionNote">Transaction Notes:</label>
+              <div class="input-group">
+                  <input type="text" class="form-control" id="transaction-note" placeholder="write Note">
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label for="transactionTag">Transaction tags:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="transaction-tag" placeholder="Enter tags" >
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3" style="margin:30px 0 0 !important;">
+              <input type="submit" class="form-control mb-2 btn btn-secondary" value="Add Transaction">
+             </div>
+                             
+          </div>
+
+  </div>
+
+<!-- ahmeds section -->
+
+<!-- end of ahmed section -->
+
+
+<!-- dunia section -->
+
+<!-- end of dunia section -->
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+<script src="./index.js"></script>
+</body>
+</html>

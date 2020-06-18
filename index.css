@@ -1,0 +1,33 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+}
+.hide-drop{
+    display: none;
+}
+.image-ghost{
+    width: 200px;
+    height: 200px;
+}
+#h2-Tcolor{
+    color: white;
+}
+.centering-modal{
+    margin: 0 auto !important;
+}
+
+/* .hiding{
+    display: none;
+} */
+
+
+ /* ahmeds section
+
+ end of ahmed section  */
+
+
+ 
+  /* dunia section 
+
+end of dunia section  */
+
