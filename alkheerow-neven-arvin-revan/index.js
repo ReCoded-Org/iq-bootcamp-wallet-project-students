@@ -9,6 +9,31 @@ const currentSymbol = document.getElementById('current-symbol')
 const currentNumber = document.getElementById('current-number')
 const income = document.getElementById('income')
 const expense = document.getElementById('expense')
+let today = new Date()
+
+form.addEventListener('submit',addNewTransaction)
+
+function addNewTransaction(e){
+e.preventDefault()
+
+const transactionValue = {
+
+    transaction: transaction.value,
+    transactionNote: transactionNote.value,
+    transactionTag: transactionTag.value
+}
+
+ul.insertAdjacentHTML("beforeend",`
+<li class="list-group-item">
+<p class="d-flex float-right m-0" style="margin:0px padding: 0">${today.toLocaleString()}</p>
+<h2>${transactionValue.transaction}</h2>
+<p>${transactionValue.transactionNote}</p>
+<p>${transactionValue.transactionTag}</p>
+</li>`)
+
+form.reset()
+
+}
 class Wallet {
     constructor(name, currency,balance, description, transactions) {
         this.name = name;
