@@ -22,7 +22,9 @@
     font-size: 23rem;
     color: #000000;;
 }
-
+#noWallet-div{
+    display: none;
+}
 
 
 

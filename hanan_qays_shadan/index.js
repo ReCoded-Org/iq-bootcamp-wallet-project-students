@@ -12,6 +12,8 @@ const balance=document.getElementById('Balance-input')
 const Description=document.getElementById('Desc-input')
 const btnForm=document.getElementById("btnForm")
 let createdWallets = JSON.parse(localStorage.getItem('createdWallets')) || [];
+let btnAnotherWallet=document.getElementById('btnNewWallet')
+btnAnotherWallet.addEventListener('click')
 /*
 function RadioCheck(){
     let selectedValue;
