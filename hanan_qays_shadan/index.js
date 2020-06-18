@@ -1,6 +1,7 @@
 
 
 const WALLETS_KEY = 'Wallets';
+const SELECTED_WALLET_KEY = 'Selected_Wallet';
 
 
 // Shadan Start
@@ -33,19 +34,19 @@ const income = document.getElementById('income')
 const expense = document.getElementById('expense')
 let today = new Date()
 
-form.addEventListener('submit',addNewTransaction)
+form.addEventListener('submit', addNewTransaction)
 
-function addNewTransaction(e){
-e.preventDefault()
+function addNewTransaction(e) {
+    e.preventDefault()
 
-const transactionValue = {
+    const transactionValue = {
 
-    transaction: transaction.value,
-    transactionNote: transactionNote.value,
-    transactionTag: transactionTag.value
-}
+        transaction: transaction.value,
+        transactionNote: transactionNote.value,
+        transactionTag: transactionTag.value
+    }
 
-ul.insertAdjacentHTML("beforeend",`
+    ul.insertAdjacentHTML("beforeend", `
 <li class="list-group-item">
 <p class="d-flex float-right m-0" style="margin:0px padding: 0">${today.toLocaleString()}</p>
 <h2>${transactionValue.transaction}</h2>
@@ -53,7 +54,7 @@ ul.insertAdjacentHTML("beforeend",`
 <p>${transactionValue.transactionTag}</p>
 </li>`)
 
-form.reset()
+    form.reset()
 
 }
 
@@ -70,16 +71,89 @@ form.reset()
 
 // Qays Start
 
+// const wallets = Wallet.getWalletsLocalStorage();
+
+const selectedWallet = Wallet.getSelectedWalletLocalStorage();
+
 class Wallet {
-    constructor(id, name, currency, balance, description, transactions = []) {
-        this.id = id;
+    constructor(name, currency, balance, description, transactions = []) {
+        // this.id = id;
         this.name = name;
         this.currency = currency;
         this.balance = balance;
         this.description = description;
         this.transactions = transactions;
+        _addNewWallet();
+    }
+
+    _addNewWallet() {
+        let wallets = Wallets.getWalletsLocalStorage();
+        wallets = wallets == null ? [] : wallets;
+        this.id = wallets.length;
+        wallets.push({walletKey:this._walletKey,name:this.name});
+        Wallet.setWalletsLocalStorage(wallets);
+        this._updateLocalStorage();
+        Wallet.setSelectedWalletKeyLocalStorage(this);
+    }
+
+    _walletKey() {
+        return `Wallet_${this.eid}`;
+    }
+    static getWalletsLocalStorage() {
+        return JSON.parse(localStorage.getItem(WALLETS_KEY));
+    }
+    static setWalletsLocalStorage(wallets) {
+        localStorage.setItem(WALLETS_KEY, JSON.stringify(wallets));
+    }
+
+
+    static getSelectedWalletLocalStorage() {
+         const walletKey = JSON.parse(localStorage.getItem(SELECTED_WALLET_KEY));
+
+         return JSON.parse(localStorage.getItem(walletKey));
+    }
+    static setSelectedWalletKeyLocalStorage(wallet) {
+        localStorage.setItem(SELECTED_WALLET_KEY, JSON.stringify(wallet._walletKey));
+    }
+
+
+    static getWalletObjectFromLocalStorage(key) {
+        return JSON.parse(localStorage.getItem(key))
+    }
+
+
+    _updateLocalStorage() {
+        localStorage.setItem(_walletKey(), JSON.stringify(this));
+    }
+    _updateBalance(transaction) {
+        this.balance = transaction.updateBalance(this.balance);
+
+        transactions.push(transaction);
+        _updateLocalStorage();
 
     }
+    addNewTransaction(type, amount, date, note, tags) {
+        let transaction;
+        if (type = 'expense') {
+            transaction = new Expense(amount, date, note, tags);
+
+        } else {
+            transaction = new Income(amount, date, note, tags);
+
+        }
+        // switch (type) {
+        //     case 'expense':
+        //         transaction = new Expense(amount, date, note, tags);
+        //         break;
+        //         case 'income':
+        //             transaction = new Income(amount, date, note, tags);
+
+        //             break;
+        // }
+        _updateBalance(transaction);
+
+    }
+
 }
 class Currency {
     constructor(id, name, symbol) {
@@ -90,22 +164,20 @@ class Currency {
     }
 }
 class Transaction {
-    constructor(amount, date, note, tags = []) {
+    constructor(amount, date, note = '', tags = '') {
         this.amount = amount;
         this.date = date;
         this.note = note;
-        this.tags = tags;
+        this.tags = tags.spilt(' ');
     }
     amountColor;
 
 
 
     html() {
-        /* <span class="badge badge-pill badge-dark">Dark</span> */
-        const badges = '';
-    //   <div class="dropdown-divider"></div>
+        const badges = tags.reduce((acc, tag) => acc + `<span class="badge badge-pill badge-dark">${tag}</span>`, '');
+        //   <div class="dropdown-divider"></div>
 
-// .list-group-flush
         return `<div class="row">
                     <div class="col">
                         <div class="row  justify-content-between">
@@ -123,11 +195,16 @@ class Transaction {
 }
 class Expense extends Transaction {
     amountColor = 'danger';
+    updateBalance(balance) {
+        return balance - amount;
+    }
 }
 
 class Income extends Transaction {
     amountColor = 'success';
-
+    updateBalance(balance) {
+        return balance + amount;
+    }
 }
 
 // console.log((new Income('nnnn') instanceof Expense));
