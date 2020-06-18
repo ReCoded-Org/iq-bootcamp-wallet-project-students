@@ -146,7 +146,7 @@ class Transaction {
         this.amount = amount;
         this.date = date;
         this.note = note;
-        this.tags = Array.isArray(tags)? tags : tags.split(' ');
+        this.tags = Array.isArray(tags) ? tags : tags.split(' ');
     }
     amountColor;
 
@@ -162,7 +162,7 @@ class Transaction {
         // console.log(event.toLocaleTimeString('en-US',));
         // console.log(this.date.toLocaleDateString('en-US', options).replace(',','').replace(',','') +' | '+event.toLocaleTimeString('en-US',) );
         console.log(this.date);
-        
+
         const dateString = this.date.toLocaleDateString('en-US', options).replace(',', '').replace(',', '') + ' | ' + this.date.toLocaleTimeString('en-US',)
 
         return `<div class="list-group-item">
@@ -222,11 +222,11 @@ function reloadLocalStorage() {
 
 
         // Wallet.getWalletsLocalStorage()
-// [{name:'dsgfusgf',walletKey:'wallet_0'}]
+        // [{name:'dsgfusgf',walletKey:'wallet_0'}]
 
 
 
-// Wallet.setSelectedWalletKeyLocalStorage(walletKey)
+        // Wallet.setSelectedWalletKeyLocalStorage(walletKey)
 
 
     } else {
@@ -337,7 +337,7 @@ function addNewTransaction(e) {
     const note = transactionNote.value;
     const tags = transactionTag.value;
     console.log(selectedWallet);
-// 'expense'   or 'income'
+    // 'expense'   or 'income'
 
     selectedWallet.addNewTransaction('expense', amount, today, note, tags);
     selectedWallet.renderTransactions(ul);
