@@ -1,6 +1,14 @@
-// Ahmed's section start
-
-
+// Ahmed's section starts
+const form = document.getElementById("formName")
+const transaction = document.getElementById('make-transaction')
+const transactionNote = document.getElementById('transaction-note')
+const transactionTag = document.getElementById('transaction-tag')
+const ul = document.getElementById('ul-list')
+const currentMoney = document.getElementById('current-money')
+const currentSymbol = document.getElementById('current-symbol')
+const currentNumber = document.getElementById('current-number')
+const income = document.getElementById('income')
+const expense = document.getElementById('expense')
 class Wallet {
     constructor(name, currency,balance, description, transactions) {
         this.name = name;
