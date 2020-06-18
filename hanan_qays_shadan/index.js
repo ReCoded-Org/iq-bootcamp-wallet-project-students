@@ -41,18 +41,18 @@ const WALLETS_KEY = 'Wallets';
 // Qays Start
 
 class Wallet {
-    constructor( id,name,   currency ,balance ,description ,transactions=[]) {
-        this.id=id;
-        this.name=name;
-        this.currency=currency;
-        this.balance=balance;
-        this.description=description;
-        this.transactions=transactions;
+    constructor(id, name, currency, balance, description, transactions = []) {
+        this.id = id;
+        this.name = name;
+        this.currency = currency;
+        this.balance = balance;
+        this.description = description;
+        this.transactions = transactions;
 
     }
 }
 class Currency {
-    constructor(id,name,symbol ) {
+    constructor(id, name, symbol) {
         this.id = id;
         this.name = name;
         this.symbol = symbol;
@@ -60,11 +60,31 @@ class Currency {
     }
 }
 class Transaction {
-    constructor(amount, date ,note ,tags=[] ) {
+    constructor(amount, date, note, tags = []) {
         this.amount = amount;
         this.date = date;
         this.note = note;
-        this.tags=tags;
+        this.tags = tags;
+    }
+    amountColor;
+
+
+
+    html() {
+        /* <span class="badge badge-pill badge-dark">Dark</span> */
+        const badges = '';
+    //   <div class="dropdown-divider"></div>
+
+// .list-group-flush
+        return `<div class="row">
+                    <div class="col">
+                        <div class="row  justify-content-between">
+                            <div class="col-4 text-${this.amountColor}">${this.amount}</div><div class="col-4">${this.date}</div>
+                        </div>
+                        <div class="row">${this.note}</div>
+                        <div class="row">${badges}</div>
+                    </div>
+                </div>`;
     }
 
 
@@ -72,9 +92,11 @@ class Transaction {
 
 }
 class Expense extends Transaction {
+    amountColor = 'danger';
 }
 
 class Income extends Transaction {
+    amountColor = 'success';
 
 }
 
