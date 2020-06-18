@@ -12,6 +12,104 @@
 <body>
 
     <!-- Shadan Start -->
+    <header>
+      <nav class="navbar navbar-dark bg-dark">
+          <!-- Navbar content -->
+          <h4 class="text-light">Wallet App</h4>
+
+      
+         <!-- UserButton-->
+<div class="dropdown float-right mr-3">
+  <button type="button" class="btn btn-info dropdown-toggle btnDrop" data-toggle="dropdown">
+    Wallet
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#">Create wallet</a>
+   
+  </div>
+</div>
+</nav>
+   </header>
+   <div class="bg text-center mt-2">
+
+      <i class='fas fa-ghost Ghost-Icon'></i>
+     <div class="wallet mt-4">
+      <h2>Ooops!</h2>
+      <p class="text-dark noWallet">You have no wallets. Start by creating one </p>
+      <button type="button" class="text-light btn-info btnCreate" data-toggle="modal" data-target="#CreateWallet"> Create Wallet</button>
+     </div>
+     
+   
+  
+  </div>
+    
+   <!-- form-->
+<!-- Modal -->
+<div class="modal fade" id="CreateWallet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create new wallet</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form>
+              <div class="container">
+                  <div class="row">
+                   <div class="col-3">
+                    <label for="user-name">Name</label>
+                    </div>
+                   <div class="col-9">
+                    <input type="text"  id="user-name" class="w-100">
+                  </div>
+                
+                 </div>
+                <!--Currency-->
+                <div class="row">
+                  <div class="col-3">
+                   <label >Currency</label>
+                     </div>
+                     <div class="col-9">
+                        <div>
+                           <input type="radio" id="Dollars"  name="CurrencyGroup" value="Dollars">
+                      <label   for="Dollars">US Dollars ($)</label>
+                        </div>
+                          <div>
+                              <input type="radio" id="Dinnars"  name="CurrencyGroup" value="Dinnars" >
+                              <label for="Dinnars">Iraqi Dinars (IQD)</label>
+                          </div>
+                     </div>  
+                   </div>
+                   <div class="row">
+                      <div class="col-3">
+                <label for="Balance-input" >Balance</label>
+                </div>
+                <div class="col-9">
+                <input type="text" id="Balance-input" class="w-100">
+                </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-3">
+                <label for="Desc-input" >Description</label>
+                </div>
+                <div class="col-9">
+                <input type="text"  id="Desc-input" class="w-100">
+                </div>
+                </div>
+              </div>
+          <div class="modal-footer">
+        <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Close">
+        <input  type="submit" id="btnForm" class="btn btn-info" value="Create Wallet">
+      </div>
+            </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+  
 
 
 
@@ -117,6 +215,9 @@ https://stackoverflow.com/questions/27148543/symfony2-display-bootstrap-switch-b
 
 
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="index.js"></script>  
 </body>
 </html>

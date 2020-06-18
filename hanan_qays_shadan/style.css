@@ -2,9 +2,26 @@
 
 
 /* Shadan Start */
-
-
-
+.noWallet{
+    font-size:20px;
+}
+.btnCreate{
+    width:200px;
+    height: 40px;
+    border-radius: 4px;
+}
+.row{
+    height:60px;
+}
+.btnDrop{
+    padding: 8px 30px 8px 30px;
+    font-size: 18px;
+    
+}
+.Ghost-Icon{
+    font-size: 23rem;
+    color: #000000;;
+}
 
 
 

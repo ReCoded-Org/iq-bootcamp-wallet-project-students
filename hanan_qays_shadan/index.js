@@ -6,7 +6,43 @@ const SELECTED_WALLET_KEY = 'Selected_Wallet';
 
 // Shadan Start
 
+const userName=document.getElementById('user-name')
+const CurrencyGroup=document.querySelectorAll('input[name="CurrencyGroup"]')
+const balance=document.getElementById('Balance-input')
+const Description=document.getElementById('Desc-input')
+const btnForm=document.getElementById("btnForm")
+let createdWallets = JSON.parse(localStorage.getItem('createdWallets')) || [];
+/*
+function RadioCheck(){
+    let selectedValue;
+    for(const val of CurrencyGroup){
+        if(val.checked)
+        {
+            selectedValue=val.value;
+        break;
 
+        }
+        
+    }
+    return selectedValue
+}
+function addWallet(userName,balance,Description){
+  const userObj={
+    userName:userName.vaue,
+    balance:balance.value,
+    Description:Description.value
+  }
+  createdWallets.push(userObj)
+  localStorage.setItem('createdWallets', JSON.stringify(createdWallets));
+  console.log(userObj)
+}
+
+btnForm.addEventListener('submit',(e)=>{
+    e.preventDefault;
+    addWallet(userName,balance,Description)
+
+}); 
+*/
 
 
 
