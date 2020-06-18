@@ -71,7 +71,7 @@ function addNewTransaction(e) {
 
 // Qays Start
 
-// const wallets = Wallet.getWalletsLocalStorage();
+const wallets = Wallet.getWalletsLocalStorage();
 
 const selectedWallet = Wallet.getSelectedWalletLocalStorage();
 
@@ -90,48 +90,12 @@ class Wallet {
         let wallets = Wallets.getWalletsLocalStorage();
         wallets = wallets == null ? [] : wallets;
         this.id = wallets.length;
-        wallets.push({walletKey:this._walletKey,name:this.name});
+        wallets.push({ walletKey: this._walletKey, name: this.name });
         Wallet.setWalletsLocalStorage(wallets);
         this._updateLocalStorage();
         Wallet.setSelectedWalletKeyLocalStorage(this);
     }
 
-    _walletKey() {
-        return `Wallet_${this.eid}`;
-    }
-    static getWalletsLocalStorage() {
-        return JSON.parse(localStorage.getItem(WALLETS_KEY));
-    }
-    static setWalletsLocalStorage(wallets) {
-        localStorage.setItem(WALLETS_KEY, JSON.stringify(wallets));
-    }
-
-
-    static getSelectedWalletLocalStorage() {
-         const walletKey = JSON.parse(localStorage.getItem(SELECTED_WALLET_KEY));
-
-         return JSON.parse(localStorage.getItem(walletKey));
-    }
-    static setSelectedWalletKeyLocalStorage(wallet) {
-        localStorage.setItem(SELECTED_WALLET_KEY, JSON.stringify(wallet._walletKey));
-    }
-
-
-    static getWalletObjectFromLocalStorage(key) {
-        return JSON.parse(localStorage.getItem(key))
-    }
-
-
-    _updateLocalStorage() {
-        localStorage.setItem(_walletKey(), JSON.stringify(this));
-    }
-    _updateBalance(transaction) {
-        this.balance = transaction.updateBalance(this.balance);
-
-        transactions.push(transaction);
-        _updateLocalStorage();
-
-    }
     addNewTransaction(type, amount, date, note, tags) {
         let transaction;
         if (type = 'expense') {
@@ -153,8 +117,58 @@ class Wallet {
         _updateBalance(transaction);
 
     }
+    _walletKey() {
+        return `Wallet_${this.eid}`;
+    }
+
+
+    static getWalletsLocalStorage() {
+        return JSON.parse(localStorage.getItem(WALLETS_KEY));
+    }
+    static setWalletsLocalStorage(wallets) {
+        localStorage.setItem(WALLETS_KEY, JSON.stringify(wallets));
+    }
+
+
+    static getSelectedWalletLocalStorage() {
+        const walletKey = JSON.parse(localStorage.getItem(SELECTED_WALLET_KEY));
+
+        return JSON.parse(localStorage.getItem(walletKey));
+    }
+    static setSelectedWalletKeyLocalStorage(wallet) {
+        localStorage.setItem(SELECTED_WALLET_KEY, JSON.stringify(wallet.walletKey));
+    }
+
+
+    static getWalletObjectFromLocalStorage(key) {
+        return JSON.parse(localStorage.getItem(key))
+    }
+
+
+    _updateLocalStorage() {
+        localStorage.setItem(_walletKey(), JSON.stringify(this));
+    }
+
+
+    _updateBalance(transaction) {
+        this.balance = transaction.updateBalance(this.balance);
+
+        transactions.push(transaction);
+        _updateLocalStorage();
+
+    }
+
+
+    renderTransactions(ul) {
+        ul.innerHTML='';
+        this.transactions.forEach(transaction => ul.insertAdjacentHTML("beforeend", transaction.html()));
+    }
+
 
 }
+
+
+
 class Currency {
     constructor(id, name, symbol) {
         this.id = id;
@@ -177,6 +191,11 @@ class Transaction {
     html() {
         const badges = tags.reduce((acc, tag) => acc + `<span class="badge badge-pill badge-dark">${tag}</span>`, '');
         //   <div class="dropdown-divider"></div>
+        const event = new Date();
+        const options = { weekday: 'short',  month: 'short', day: 'numeric',year: 'numeric', };
+
+        console.log(event.toLocaleDateString('en-US', options));
+        console.log(event.toLocaleTimeString('en-US',));
 
         return `<div class="row">
                     <div class="col">
