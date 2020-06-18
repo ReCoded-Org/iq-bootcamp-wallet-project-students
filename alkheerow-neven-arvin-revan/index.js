@@ -40,3 +40,6 @@ class Currency {
 
 
 // ends of ahmed's section
+
+
+// another section
