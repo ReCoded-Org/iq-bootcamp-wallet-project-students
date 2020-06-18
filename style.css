@@ -3,3 +3,8 @@
     padding: 0;
     box-sizing: border-box;
 }
+.open-wallet{
+    visibility: visible;
+    z-index: 10;
+  }
+  
