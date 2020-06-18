@@ -1,115 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wallet</title>
-   
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css"/>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" />
 
 </head>
+
 <body>
 
     <!-- Shadan Start -->
     <header>
-      <nav class="navbar navbar-dark bg-dark">
-          <!-- Navbar content -->
-          <h4 class="text-light">Wallet App</h4>
+        <nav class="navbar navbar-dark bg-dark">
+            <!-- Navbar content -->
+            <h4 class="text-light">Wallet App</h4>
 
-      
-         <!-- UserButton-->
-<div class="dropdown float-right mr-3">
-  <button type="button" class="btn btn-info dropdown-toggle btnDrop" data-toggle="dropdown">
-    Wallet
-  </button>
-  <div class="dropdown-menu">
-    <a class="dropdown-item" href="#">Create wallet</a>
-   
-  </div>
-</div>
-</nav>
-   </header>
-   <div class="bg text-center mt-2">
 
-      <i class='fas fa-ghost Ghost-Icon'></i>
-     <div class="wallet mt-4">
-      <h2>Ooops!</h2>
-      <p class="text-dark noWallet">You have no wallets. Start by creating one </p>
-      <button type="button" class="text-light btn-info btnCreate" data-toggle="modal" data-target="#CreateWallet"> Create Wallet</button>
-     </div>
-     
-   
-  
-  </div>
-    
-   <!-- form-->
-<!-- Modal -->
-<div class="modal fade" id="CreateWallet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Create new wallet</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-          <form>
-              <div class="container">
-                  <div class="row">
-                   <div class="col-3">
-                    <label for="user-name">Name</label>
-                    </div>
-                   <div class="col-9">
-                    <input type="text"  id="user-name" class="w-100">
-                  </div>
-                
-                 </div>
-                <!--Currency-->
-                <div class="row">
-                  <div class="col-3">
-                   <label >Currency</label>
-                     </div>
-                     <div class="col-9">
-                        <div>
-                           <input type="radio" id="Dollars"  name="CurrencyGroup" value="Dollars">
-                      <label   for="Dollars">US Dollars ($)</label>
-                        </div>
-                          <div>
-                              <input type="radio" id="Dinnars"  name="CurrencyGroup" value="Dinnars" >
-                              <label for="Dinnars">Iraqi Dinars (IQD)</label>
-                          </div>
-                     </div>  
-                   </div>
-                   <div class="row">
-                      <div class="col-3">
-                <label for="Balance-input" >Balance</label>
+            <!-- UserButton-->
+            <div class="dropdown float-right mr-3">
+                <button type="button" class="btn btn-info dropdown-toggle btnDrop" data-toggle="dropdown">
+                    Wallet
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Create wallet</a>
+
                 </div>
-                <div class="col-9">
-                <input type="text" id="Balance-input" class="w-100">
-                </div>
-                   </div>
-                   <div class="row">
-                      <div class="col-3">
-                <label for="Desc-input" >Description</label>
-                </div>
-                <div class="col-9">
-                <input type="text"  id="Desc-input" class="w-100">
-                </div>
-                </div>
-              </div>
-          <div class="modal-footer">
-        <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Close">
-        <input  type="submit" id="btnForm" class="btn btn-info" value="Create Wallet">
-      </div>
-            </form>
-      </div>
-      
+            </div>
+        </nav>
+    </header>
+    <div class="bg text-center mt-2">
+
+        <i class='fas fa-ghost Ghost-Icon'></i>
+        <div class="wallet mt-4">
+            <h2>Ooops!</h2>
+            <p class="text-dark noWallet">You have no wallets. Start by creating one </p>
+            <button type="button" class="text-light btn-info btnCreate" data-toggle="modal" data-target="#CreateWallet">
+                Create Wallet</button>
+        </div>
+
+
+
     </div>
-  </div>
-</div>
-  
+
+    <!-- form-->
+    <!-- Modal -->
+    <div class="modal fade" id="CreateWallet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create new wallet</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id='walletForm'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-3">
+                                    <label for="user-name">Name</label>
+                                </div>
+                                <div class="col-9">
+                                    <input type="text" id="user-name" class="w-100">
+                                </div>
+
+                            </div>
+                            <!--Currency-->
+                            <div class="row">
+                                <div class="col-3">
+                                    <label>Currency</label>
+                                </div>
+                                <div class="col-9">
+                                    <div>
+                                        <input type="radio" id="Dollars" name="CurrencyGroup" value="Dollars">
+                                        <label for="Dollars">US Dollars ($)</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" id="Dinnars" name="CurrencyGroup" value="Dinnars">
+                                        <label for="Dinnars">Iraqi Dinars (IQD)</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <label for="Balance-input">Balance</label>
+                                </div>
+                                <div class="col-9">
+                                    <input type="text" id="Balance-input" class="w-100">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <label for="Desc-input">Description</label>
+                                </div>
+                                <div class="col-9">
+                                    <input type="text" id="Desc-input" class="w-100">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Close">
+                            <input type="submit" id="btnForm" class="btn btn-info" value="Create Wallet">
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 
 
 
@@ -135,73 +140,74 @@
 
     <!-- Boot strap grid for the form -->
     <!-- List  -->
-  <section>
-    <div class="container">
-        <h1 style="margin: 50px 0px;">Wallet Balance: <span id="current-money">$0.00</span></h1>
+    <section>
+        <div class="container">
+            <h1 style="margin: 50px 0px;">Wallet Balance: <span id="current-money">$0.00</span></h1>
 
-        <form id="formName">
-            <div class="form-row">
+            <form id="formName">
+                <div class="form-row">
 
-              <div class="col-md-4 mb-4">
-                <label for="makeTransaction">Make a transaction:</label>
-                <div class="input-group">
-                    <input type="number" class="form-control" id="make-transaction" placeholder="Select Money" required>
-                    <div class="input-group-append">
-                        <span class="input-group-text" id="current-symbol">$</span>
-                        <span class="input-group-text" id="current-number">0.00</span>
-                      </div>
-                </div>
-              </div>
-
-              <div class="col-md-4 mb-3" style="margin:30px 0 0 !important;">
-                <div class="input-group-prepend">
-                  <button class="form-control btn btn-outline-success " type="button" id="income">Income</button>
-                  <button class="form-control btn btn-outline-danger" type="button" id="expense">Expense</button>
-                </div>
-              </div>
-
-            </div>
-
-            <div class="form-row">
-
-                <div class="col-md-4 mb-3">
-                  <label for="transactionNote">Transaction Notes:</label>
-                  <div class="input-group">
-                      <input type="text" class="form-control" id="transaction-note" placeholder="write Note">
-                  </div>
-                </div>
- 
-                <div class="col-md-4 mb-3">
-                    <label for="transactionTag">Transaction tags:</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="transaction-tag" placeholder="Enter tags" >
+                    <div class="col-md-4 mb-4">
+                        <label for="makeTransaction">Make a transaction:</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="make-transaction" placeholder="Select Money"
+                                required>
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="current-symbol">$</span>
+                                <span class="input-group-text" id="current-number">0.00</span>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="col-md-4 mb-3" style="margin:30px 0 0 !important;">
+                        <div class="input-group-prepend">
+                            <button class="form-control btn btn-outline-success " type="button"
+                                id="income">Income</button>
+                            <button class="form-control btn btn-outline-danger" type="button"
+                                id="expense">Expense</button>
+                        </div>
+                    </div>
+
                 </div>
 
-                <div class="col-md-4 mb-3" style="margin:30px 0 0 !important;">
-                  <input type="submit"  class="form-control mb-2 btn btn-secondary" value="Add Transaction">
-                 </div>
-                                 
-              </div>
+                <div class="form-row">
 
-    </div>
-  </section>
+                    <div class="col-md-4 mb-3">
+                        <label for="transactionNote">Transaction Notes:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="transaction-note" placeholder="write Note">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label for="transactionTag">Transaction tags:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="transaction-tag" placeholder="Enter tags">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3" style="margin:30px 0 0 !important;">
+                        <input type="submit" class="form-control mb-2 btn btn-secondary" value="Add Transaction">
+                    </div>
+
+                </div>
+
+        </div>
+    </section>
 
     <section>
-      <div class="container">
-         <div class="col-md-8 col-lg-6">
-             <ul id="ul-list" class="list-group list-group-flush">
-               
-             </ul>
-         </div>
-      </div>
-   </section>
+        <div class="container">
+                <ul id="ul-list" class="list-group list-group-flush">
+
+                </ul>
+        </div>
+    </section>
 
 
-<!-- https://getbootstrap.com/docs/4.0/components/forms/#inline-1 -->
-<!-- https://getbootstrap.com/docs/4.0/components/buttons/#checkbox-and-radio-buttons -->
-<!-- https://getbootstrap.com/docs/4.0/components/input-group/#checkboxes-and-radios -->
-<!--   https://stackoverflow.com/questions/36373217/bootstrap-4-toggle-button?answertab=oldest#tab-top  
+    <!-- https://getbootstrap.com/docs/4.0/components/forms/#inline-1 -->
+    <!-- https://getbootstrap.com/docs/4.0/components/buttons/#checkbox-and-radio-buttons -->
+    <!-- https://getbootstrap.com/docs/4.0/components/input-group/#checkboxes-and-radios -->
+    <!--   https://stackoverflow.com/questions/36373217/bootstrap-4-toggle-button?answertab=oldest#tab-top  
     https://www.codeply.com/go/IeuO1fPf7H 
 https://github.com/rikulo/bootjack/issues/19
 https://stackoverflow.com/questions/27148543/symfony2-display-bootstrap-switch-button-and-get-selected-values-in-controller
@@ -218,6 +224,7 @@ https://stackoverflow.com/questions/27148543/symfony2-display-bootstrap-switch-b
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <script src="index.js"></script>  
+    <script src="index.js"></script>
 </body>
+
 </html>

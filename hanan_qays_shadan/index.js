@@ -4,59 +4,17 @@ const WALLETS_KEY = 'Wallets';
 const SELECTED_WALLET_KEY = 'Selected_Wallet';
 
 
-// Shadan Start
 
-const userName=document.getElementById('user-name')
-const CurrencyGroup=document.querySelectorAll('input[name="CurrencyGroup"]')
-const balance=document.getElementById('Balance-input')
-const Description=document.getElementById('Desc-input')
-const btnForm=document.getElementById("btnForm")
-
-function RadioCheck(){
-    let selectedValue;
-    for(const val of CurrencyGroup){
-        if(val.checked)
-        {
-            selectedValue=val.value;
-        break;
-
-        }
-        
-    }
-    return selectedValue
-}
-function addWallet(userName,balance,Description){
-  const userObj={
-    userName:userName.vaue,
-    balance:balance.value,
-    Description:Description.value
-  }
-  createdWallets.push(userObj)
-  localStorage.setItem('createdWallets', JSON.stringify(createdWallets));
-  console.log(userObj)
-}
-
-btnForm.addEventListener('submit',(e)=>{
-    e.preventDefault();
-   const wallet =  Wallet(userName,new Currency(0,'Dollar','$'),balance,Description);
-
-}); 
+const nameInput = document.getElementById('user-name')
+const CurrencyGroup = document.querySelectorAll('input[name="CurrencyGroup"]')
+const balanceInput = document.getElementById('Balance-input')
+const descriptionInput = document.getElementById('Desc-input');
+const walletForm = document.getElementById("walletForm")
 
 
 
 
 
-
-// Shadan End
-
-
-
-
-
-
-
-
-// Hanan Start
 const form = document.getElementById("formName")
 const transaction = document.getElementById('make-transaction')
 const transactionNote = document.getElementById('transaction-note')
@@ -67,76 +25,34 @@ const currentSymbol = document.getElementById('current-symbol')
 const currentNumber = document.getElementById('current-number')
 const income = document.getElementById('income')
 const expense = document.getElementById('expense')
-let today = new Date()
-
-form.addEventListener('submit', addNewTransaction)
-
-function addNewTransaction(e) {
-    e.preventDefault()
-
-    const transactionValue = {
-
-        transaction: transaction.value,
-        transactionNote: transactionNote.value,
-        transactionTag: transactionTag.value
-    }
-
-    ul.insertAdjacentHTML("beforeend", `
-<li class="list-group-item">
-<p class="d-flex float-right m-0" style="margin:0px padding: 0">${today.toLocaleString()}</p>
-<h2>${transactionValue.transaction}</h2>
-<p>${transactionValue.transactionNote}</p>
-<p>${transactionValue.transactionTag}</p>
-</li>`)
-
-    form.reset()
-
-}
-
-
-// Hanan End
-
-
-
-
-// https://getbootstrap.com/docs/4.0/components/modal/#events
-
-
-
-
-// Qays Start
-
-const wallets = Wallet.getWalletsLocalStorage();
-
-const selectedWallet = Wallet.getSelectedWalletLocalStorage();
-if (selectedWallet == null){
-    //display no wallets 
-}
+const today = new Date();
 
 class Wallet {
-    constructor(name, currency, balance, description, transactions = []) {
-        // this.id = id;
+    constructor(id, name, currency, balance, description, transactions = []) {
+        this.id = id;
         this.name = name;
         this.currency = currency;
         this.balance = balance;
         this.description = description;
         this.transactions = transactions;
-        this._addNewWallet();
+        if (id === null) this._addNewWallet();
     }
 
     _addNewWallet() {
-        let wallets = Wallets.getWalletsLocalStorage();
+        let wallets = Wallet.getWalletsLocalStorage();
         wallets = wallets == null ? [] : wallets;
         this.id = wallets.length;
-        wallets.push({ walletKey: this._walletKey, name: this.name });
+        wallets.push({ walletKey: this._walletKey(), name: this.name });
         Wallet.setWalletsLocalStorage(wallets);
         this._updateLocalStorage();
-        Wallet.setSelectedWalletKeyLocalStorage(this);
+        console.log();
+
+        Wallet.setSelectedWalletKeyLocalStorage(wallets[this.id]);
     }
 
     addNewTransaction(type, amount, date, note, tags) {
         let transaction;
-        if (type = 'expense') {
+        if (type === 'expense') {
             transaction = new Expense(amount, date, note, tags);
 
         } else {
@@ -152,14 +68,14 @@ class Wallet {
 
         //             break;
         // }
-        _updateBalance(transaction);
+        this._updateBalance(transaction);
 
     }
 
 
 
     _walletKey() {
-        return `Wallet_${this.eid}`;
+        return `Wallet_${this.id}`;
     }
 
 
@@ -173,8 +89,15 @@ class Wallet {
 
     static getSelectedWalletLocalStorage() {
         const walletKey = JSON.parse(localStorage.getItem(SELECTED_WALLET_KEY));
+        if (walletKey == null) return null;
+        const walletInfo = JSON.parse(localStorage.getItem(walletKey));
+        const transactions = walletInfo.transactions.map(e => {
+            if (e.type === 'expense') return new Expense(e.amount, new Date(e.date), e.note, e.tags);
+            if (e.type === 'income') return new Income(e.amount, new Date(e.date), e.note, e.tags);
 
-        return JSON.parse(localStorage.getItem(walletKey));
+        });
+        const wallet = new Wallet(walletInfo.id, walletInfo.name, walletInfo.currency, walletInfo.balance, walletInfo.description, transactions);
+        return wallet;
     }
     static setSelectedWalletKeyLocalStorage(wallet) {
         localStorage.setItem(SELECTED_WALLET_KEY, JSON.stringify(wallet.walletKey));
@@ -187,21 +110,21 @@ class Wallet {
 
 
     _updateLocalStorage() {
-        localStorage.setItem(_walletKey(), JSON.stringify(this));
+        localStorage.setItem(this._walletKey(), JSON.stringify(this));
     }
 
 
     _updateBalance(transaction) {
         this.balance = transaction.updateBalance(this.balance);
 
-        transactions.push(transaction);
-        _updateLocalStorage();
+        this.transactions.push(transaction);
+        this._updateLocalStorage();
 
     }
 
 
     renderTransactions(ul) {
-        ul.innerHTML='';
+        ul.innerHTML = '';
         this.transactions.forEach(transaction => ul.insertAdjacentHTML("beforeend", transaction.html()));
     }
 
@@ -223,28 +146,32 @@ class Transaction {
         this.amount = amount;
         this.date = date;
         this.note = note;
-        this.tags = tags.spilt(' ');
+        this.tags = Array.isArray(tags)? tags : tags.split(' ');
     }
     amountColor;
 
 
 
     html() {
-        const badges = tags.reduce((acc, tag) => acc + `<span class="badge badge-pill badge-dark">${tag}</span>`, '');
+        const badges = this.tags.reduce((acc, tag) => acc + `<span class="badge badge-pill badge-dark">${tag}</span>`, '');
         //   <div class="dropdown-divider"></div>
-        const event = new Date();
-        const options = { weekday: 'short',  month: 'short', day: 'numeric',year: 'numeric', };
 
-        console.log(event.toLocaleDateString('en-US', options));
-        console.log(event.toLocaleTimeString('en-US',));
+        const options = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', };
 
-        return `<div class="row">
+        // console.log(event.toLocaleDateString('en-US', options));
+        // console.log(event.toLocaleTimeString('en-US',));
+        // console.log(this.date.toLocaleDateString('en-US', options).replace(',','').replace(',','') +' | '+event.toLocaleTimeString('en-US',) );
+        console.log(this.date);
+        
+        const dateString = this.date.toLocaleDateString('en-US', options).replace(',', '').replace(',', '') + ' | ' + this.date.toLocaleTimeString('en-US',)
+
+        return `<div class="list-group-item">
                     <div class="col">
                         <div class="row  justify-content-between">
-                            <div class="col-4 text-${this.amountColor}">${this.amount}</div><div class="col-4">${this.date}</div>
+                            <div class="text-${this.amountColor}">${this.amount}</div><div class=>${dateString}</div>
                         </div>
-                        <div class="row">${this.note}</div>
-                        <div class="row">${badges}</div>
+                        <div class="">${this.note}</div>
+                        <div class="">${badges}</div>
                     </div>
                 </div>`;
     }
@@ -255,19 +182,61 @@ class Transaction {
 }
 class Expense extends Transaction {
     amountColor = 'danger';
+    type = 'expense';
     updateBalance(balance) {
-        return balance - amount;
+        return balance - this.amount;
     }
 }
 
 class Income extends Transaction {
     amountColor = 'success';
+    type = 'income';
+
     updateBalance(balance) {
-        return balance + amount;
+        return balance + this.amount;
     }
 }
 
 // console.log((new Income('nnnn') instanceof Expense));
+
+
+
+let wallets;
+
+let selectedWallet;
+function reloadLocalStorage() {
+    wallets = Wallet.getWalletsLocalStorage();
+    console.log(wallets);
+
+    selectedWallet = Wallet.getSelectedWalletLocalStorage();
+    console.log(selectedWallet);
+
+    if (selectedWallet != null) {
+        //display no wallets 
+        console.log('hide empty message');
+        //display balncae and curreny and form
+        currentMoney.innerText = selectedWallet.currency.symbol + selectedWallet.balance;
+        currentSymbol.innerText = selectedWallet.currency.symbol;
+        currentNumber.innerText = selectedWallet.balance;
+        selectedWallet.renderTransactions(ul);
+
+
+        // Wallet.getWalletsLocalStorage()
+// [{name:'dsgfusgf',walletKey:'wallet_0'}]
+
+
+
+// Wallet.setSelectedWalletKeyLocalStorage(walletKey)
+
+
+    } else {
+
+
+        console.log('show empty message and hide the form');
+
+    }
+}
+reloadLocalStorage();
 
 // Qays End
 
@@ -303,5 +272,90 @@ class Income extends Transaction {
 // Currency    properties id name symbol 
 
 
+
+
+
+// Shadan Start
+
+
+function RadioCheck() {
+    let selectedValue;
+    for (const val of CurrencyGroup) {
+        if (val.checked) {
+            selectedValue = val.value;
+            break;
+
+        }
+
+    }
+    return selectedValue
+}
+function addWallet() {
+    const name = nameInput.value;
+    const balance = parseInt(balanceInput.value);
+    const description = descriptionInput.value;
+
+
+    const wallet = new Wallet(null, name, new Currency(0, 'Dollar', '$'), balance, description);
+    console.log(wallet);
+    reloadLocalStorage();
+
+}
+
+walletForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    console.log('sduhfgsdghfgbsedhjgfbgsejdh');
+
+    addWallet();
+
+});
+
+
+
+
+
+
+// Shadan End
+
+
+
+
+
+
+
+
+// Hanan Start
+
+
+form.addEventListener('submit', addNewTransaction)
+
+function addNewTransaction(e) {
+    e.preventDefault()
+
+
+    const amount = parseInt(transaction.value);
+    const note = transactionNote.value;
+    const tags = transactionTag.value;
+    console.log(selectedWallet);
+// 'expense'   or 'income'
+
+    selectedWallet.addNewTransaction('expense', amount, today, note, tags);
+    selectedWallet.renderTransactions(ul);
+
+    form.reset()
+
+}
+
+
+// Hanan End
+
+
+
+
+// https://getbootstrap.com/docs/4.0/components/modal/#events
+
+
+
+// Qays Start
 
 
