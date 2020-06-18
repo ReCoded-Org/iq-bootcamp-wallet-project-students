@@ -11,8 +11,7 @@ const CurrencyGroup=document.querySelectorAll('input[name="CurrencyGroup"]')
 const balance=document.getElementById('Balance-input')
 const Description=document.getElementById('Desc-input')
 const btnForm=document.getElementById("btnForm")
-let createdWallets = JSON.parse(localStorage.getItem('createdWallets')) || [];
-/*
+
 function RadioCheck(){
     let selectedValue;
     for(const val of CurrencyGroup){
@@ -38,11 +37,11 @@ function addWallet(userName,balance,Description){
 }
 
 btnForm.addEventListener('submit',(e)=>{
-    e.preventDefault;
-    addWallet(userName,balance,Description)
+    e.preventDefault();
+   const wallet =  Wallet(userName,new Currency(0,'Dollar','$'),balance,Description);
 
 }); 
-*/
+
 
 
 
@@ -110,6 +109,9 @@ function addNewTransaction(e) {
 const wallets = Wallet.getWalletsLocalStorage();
 
 const selectedWallet = Wallet.getSelectedWalletLocalStorage();
+if (selectedWallet == null){
+    //display no wallets 
+}
 
 class Wallet {
     constructor(name, currency, balance, description, transactions = []) {
@@ -119,7 +121,7 @@ class Wallet {
         this.balance = balance;
         this.description = description;
         this.transactions = transactions;
-        _addNewWallet();
+        this._addNewWallet();
     }
 
     _addNewWallet() {
@@ -153,6 +155,9 @@ class Wallet {
         _updateBalance(transaction);
 
     }
+
+
+
     _walletKey() {
         return `Wallet_${this.eid}`;
     }
