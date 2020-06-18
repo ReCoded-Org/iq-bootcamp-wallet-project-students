@@ -29,11 +29,10 @@ class Income extends Transaction{
 }
 
 class Currency {
-    constructor(id,amount, name, symbol){
+    constructor(id, name, symbol){
         this.id = id;
         this.name = name;
         this.symbol = symbol;
-        this.amount = amount;
     }
 }
     
@@ -42,4 +41,28 @@ class Currency {
 // ends of ahmed's section
 
 
-// another section
+
+
+
+// arvin start section
+
+
+
+
+// arvin end section
+
+
+
+
+
+
+
+
+// neven start section
+
+
+
+
+// neven end section
+
+
