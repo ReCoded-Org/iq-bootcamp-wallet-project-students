@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wallet</title>
-    <script src="index.js"></script>
+   
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css"/>
 
@@ -37,8 +37,67 @@
 
     <!-- Boot strap grid for the form -->
     <!-- List  -->
+  <section>
+    <div class="container">
+        <h1 style="margin: 50px 0px;">Wallet Balance: <span id="current-money">$0.00</span></h1>
 
+        <form id="formName">
+            <div class="form-row">
 
+              <div class="col-md-4 mb-4">
+                <label for="makeTransaction">Make a transaction:</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" id="make-transaction" placeholder="Select Money" required>
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="current-symbol">$</span>
+                        <span class="input-group-text" id="current-number">0.00</span>
+                      </div>
+                </div>
+              </div>
+
+              <div class="col-md-4 mb-3" style="margin:30px 0 0 !important;">
+                <div class="input-group-prepend">
+                  <button class="form-control btn btn-outline-success " type="button" id="income">Income</button>
+                  <button class="form-control btn btn-outline-danger" type="button" id="expense">Expense</button>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="col-md-4 mb-3">
+                  <label for="transactionNote">Transaction Notes:</label>
+                  <div class="input-group">
+                      <input type="text" class="form-control" id="transaction-note" placeholder="write Note">
+                  </div>
+                </div>
+ 
+                <div class="col-md-4 mb-3">
+                    <label for="transactionTag">Transaction tags:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="transaction-tag" placeholder="Enter tags" >
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3" style="margin:30px 0 0 !important;">
+                  <input type="submit"  class="form-control mb-2 btn btn-secondary" value="Add Transaction">
+                 </div>
+                                 
+              </div>
+
+    </div>
+  </section>
+
+    <section>
+      <div class="container">
+         <div class="col-md-8 col-lg-6">
+             <ul id="ul-list" class="list-group list-group-flush">
+               
+             </ul>
+         </div>
+      </div>
+   </section>
 
 
 <!-- https://getbootstrap.com/docs/4.0/components/forms/#inline-1 -->
@@ -58,6 +117,6 @@ https://stackoverflow.com/questions/27148543/symfony2-display-bootstrap-switch-b
 
 
 
-    
+    <script src="index.js"></script>  
 </body>
 </html>
