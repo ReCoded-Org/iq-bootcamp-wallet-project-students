@@ -1,4 +1,4 @@
-// Ahmed's start
+// Ahmed's section start
 
 
 class Wallet {
@@ -29,10 +29,11 @@ class Income extends Transaction{
 }
 
 class Currency {
-    constructor(id, name, symbol){
+    constructor(id,amount, name, symbol){
         this.id = id;
         this.name = name;
         this.symbol = symbol;
+        this.amount = amount;
     }
 }
     
