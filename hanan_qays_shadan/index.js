@@ -146,7 +146,7 @@ class Transaction {
         this.amount = amount;
         this.date = date;
         this.note = note;
-        this.tags = Array.isArray(tags) ? tags : tags.split(' ');
+        this.tags = Array.isArray(tags) ? tags : tags.split(',');
     }
     amountColor;
 
