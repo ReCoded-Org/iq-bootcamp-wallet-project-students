@@ -18,8 +18,9 @@ body {
   background-color: #f5f5f5;
 }
 
+
 /* Custom page CSS
-  -------------------------------------------------- */
+-------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 
 body > .container {
@@ -33,14 +34,4 @@ body > .container {
 
 code {
   font-size: 80%;
-}
-a {
-  color: #02090f;
-  text-decoration: none;
-}
-
-a:hover,
-a:focus {
-  color: #e7390e;
-  text-decoration: underline;
 }
