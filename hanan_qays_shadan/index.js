@@ -8,7 +8,8 @@ const CurrencyGroup = document.querySelectorAll('input[name="CurrencyGroup"]')
 const balanceInput = document.getElementById('Balance-input')
 const descriptionInput = document.getElementById('Desc-input');
 const walletForm = document.getElementById("walletForm")
-const buttonDrop = document.getElementById('button-drop')
+const btnDrop = document.getElementsByClassName('btnDrop')[0];
+const dropdownMenu = document.getElementsByClassName('dropdown-menu')[0];
 const noWalletHide = document.getElementById('no-wallet-hide')
 const walletHide = document.getElementById('wallet-hide')
 
@@ -21,8 +22,8 @@ const ul = document.getElementById('ul-list')
 const currentMoney = document.getElementById('current-money')
 const currentSymbol = document.getElementById('current-symbol')
 const currentNumber = document.getElementById('current-number')
-const income = document.getElementById('income')
-const expense = document.getElementById('expense')
+const incomeButton = document.getElementById('income')
+const expenseButton = document.getElementById('expense')
 const today = new Date();
 
 class Wallet {
@@ -218,6 +219,8 @@ function reloadLocalStorage() {
     if (selectedWallet != null) {
         //display no wallets 
         console.log('hide empty message');
+        noWalletHide.style.display = "none"
+
         //display balncae and curreny and form
         currentMoney.innerText = selectedWallet.currency.symbol +" "+ selectedWallet.balance;
         currentSymbol.innerText = selectedWallet.currency.symbol;
@@ -236,10 +239,8 @@ function reloadLocalStorage() {
 
 
 
-        const btnDrop = document.getElementsByClassName('btnDrop')[0];
         btnDrop.innerText = selectedWallet.name + '\'s wallet'
-        const dropdownMenu = document.getElementsByClassName('dropdown-menu')[0];
-
+    
         dropdownMenu.innerHTML = '';
         wallets.forEach(wallet => {
             if (wallet.walletKey != selectedWallet._walletKey())
@@ -249,12 +250,15 @@ function reloadLocalStorage() {
         dropdownMenu.insertAdjacentHTML("beforeend", ` <a class="dropdown-item" href="#" data-toggle="modal" data-target="#CreateWallet">Create wallet</a>`)
 
 
-
+        
+         
+        
 
 
     } else {
 
-
+        btnDrop.style.display = "none"
+        walletHide.style.display = "none"
         console.log('show empty message and hide the form');
 
     }
@@ -341,17 +345,6 @@ walletForm.addEventListener('submit', (e) => {
 
 });
 
-function walletChecking() {
-    if (Wallet.getWalletsLocalStorage() !== null) {
-        noWalletHide.style.display = "none"
-
-    } else {
-        buttonDrop.style.display = "none"
-        walletHide.style.display = "none"
-
-    }
-}
-walletChecking();
 
 
 // Shadan End
@@ -381,6 +374,28 @@ function addNewTransaction(e) {
 
 
 function selectTransactionType(type = 'income') {
+    console.log(type);
+
+    if (type ==='income'){
+        console.log(type);
+
+        incomeButton.classList.remove("btn-outline-success");
+        incomeButton.classList.add("btn-success");
+
+        expenseButton.classList.remove('btn-danger');
+        expenseButton.classList.add('btn-outline-danger');
+
+    } else {
+        console.log(type);
+
+        
+        incomeButton.classList.add("btn-outline-success");
+        incomeButton.classList.remove("btn-success");
+
+        expenseButton.classList.add('btn-danger');
+        expenseButton.classList.remove('btn-outline-danger');
+    }
+
     transactionType = type
 }
 
