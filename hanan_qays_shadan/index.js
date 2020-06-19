@@ -59,15 +59,7 @@ class Wallet {
             transaction = new Income(amount, date, note, tags);
 
         }
-        // switch (type) {
-        //     case 'expense':
-        //         transaction = new Expense(amount, date, note, tags);
-        //         break;
-        //         case 'income':
-        //             transaction = new Income(amount, date, note, tags);
-
-        //             break;
-        // }
+     
         this._updateBalance(transaction);
 
     }
@@ -158,15 +150,10 @@ class Transaction {
 
     html() {
         const badges = this.tags.reduce((acc, tag) => acc + ` <span class="badge badge-pill badge-dark">${tag}</span> `, '');
-        //   <div class="dropdown-divider"></div>
 
         const options = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', };
 
-        // console.log(event.toLocaleDateString('en-US', options));
-        // console.log(event.toLocaleTimeString('en-US',));
-        // console.log(this.date.toLocaleDateString('en-US', options).replace(',','').replace(',','') +' | '+event.toLocaleTimeString('en-US',) );
-        console.log(this.date);
-
+      
         const dateString = this.date.toLocaleDateString('en-US', options).replace(',', '').replace(',', '') + ' | ' + this.date.toLocaleTimeString('en-US',)
 
         return `<div class="list-group-item">
@@ -202,7 +189,6 @@ class Income extends Transaction {
     }
 }
 
-// console.log((new Income('nnnn') instanceof Expense));
 
 
 
@@ -217,28 +203,12 @@ function reloadLocalStorage() {
     console.log(selectedWallet);
 
     if (selectedWallet != null) {
-        //display no wallets 
-        console.log('hide empty message');
         noWalletHide.style.display = "none"
 
-        //display balncae and curreny and form
         currentMoney.innerText = selectedWallet.currency.symbol +" "+ selectedWallet.balance;
         currentSymbol.innerText = selectedWallet.currency.symbol;
         currentNumber.innerText = selectedWallet.balance;
         selectedWallet.renderTransactions(ul);
-
-
-        // Wallet.getWalletsLocalStorage()
-        // [{name:'dsgfusgf',walletKey:'wallet_0'}]
-
-
-
-        // Wallet.setSelectedWalletKeyLocalStorage(walletKey)
-
-
-
-
-
         btnDrop.innerText = selectedWallet.name + '\'s wallet'
     
         dropdownMenu.innerHTML = '';
@@ -268,36 +238,6 @@ function setSelectedWalletKeyLocalStorage(walletKey) {
     Wallet.setSelectedWalletKeyLocalStorage(walletKey);
     reloadLocalStorage();
 }
-// Qays End
-
-
-// Objects
-//                                            String Object   number  string
-// Wallet     properties  "id random number"  Name   Currency Balance Description transactions
-// set balance(updateBalance)=> this.balance = updateBalance(balance);
-//             ^this is a method form transaction
-// addNewTransaction(transaction) 
-// read from localStorage()=>Wallets List 
-/////////////// read all transactionsForWalletFromStorage()=> listOfTransaction
-// renderTransactions(ul from Dom)=> change the dom 
-
-// Transaction  properties  amount  Date() date note tags  
-// renderTransaction()=> html  except the price text
-
-
-// Expense    extends Transaction   -  
-// method updateBalance function(balance) => newBalance 
-// super.renderTransaction() renderTransaction() only the price text
-
-
-// Income      extends Transaction   +
-// method updateBalance function(balance) => newBalance 
-// super.renderTransaction() renderTransaction() only the price text
-
-// Currency    properties id name symbol 
-
-// Shadan Start
-
 
 function getCurrency() {
     let selectedValue;
@@ -347,10 +287,6 @@ walletForm.addEventListener('submit', (e) => {
 
 
 
-// Shadan End
-
-// Hanan Start
-
 let transactionType = "income"
 
 form.addEventListener('submit', addNewTransaction)
@@ -362,8 +298,6 @@ function addNewTransaction(e) {
     const amount = parseInt(transaction.value);
     const note = transactionNote.value;
     const tags = transactionTag.value;
-    console.log(selectedWallet);
-    // 'expense'   or 'income'
 
     selectedWallet.addNewTransaction(transactionType, amount, today, note, tags);
     reloadLocalStorage();
@@ -398,16 +332,3 @@ function selectTransactionType(type = 'income') {
 
     transactionType = type
 }
-
-// Hanan End
-
-
-
-
-// https://getbootstrap.com/docs/4.0/components/modal/#events
-
-
-
-// Qays Start
-
-
