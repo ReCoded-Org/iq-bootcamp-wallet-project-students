@@ -11,29 +11,35 @@ const income = document.getElementById('income')
 const expense = document.getElementById('expense')
 let today = new Date()
 
-form.addEventListener('submit',addNewTransaction)
+// form.addEventListener('submit',addNewTransaction)
 
-function addNewTransaction(e){
-e.preventDefault()
+// function addNewTransaction(e){
+// e.preventDefault()
 
-const transactionValue = {
+// const transactionValue = {
 
-    transaction: transaction.value,
-    transactionNote: transactionNote.value,
-    transactionTag: transactionTag.value
-}
+//     transaction: transaction.value,
+//     transactionNote: transactionNote.value,
+//     transactionTag: transactionTag.value
+// }
 
-ul.insertAdjacentHTML("beforeend",`
-<li class="list-group-item">
-<p class="d-flex float-right m-0" style="margin:0px padding: 0">${today.toLocaleString()}</p>
-<h2>${transactionValue.transaction}</h2>
-<p>${transactionValue.transactionNote}</p>
-<p>${transactionValue.transactionTag}</p>
-</li>`)
+// ul.insertAdjacentHTML("beforeend",`
+// <li class="list-group-item mt-5 mw-100" >
+// <p class="d-flex float-right m-0" style="margin:0px padding: 0">${today.toLocaleString()}</p>
+// <h2 class"">${transactionValue.transaction}</h2>
+// <hr>
+// <p>${transactionValue.transactionNote}</p>
+// <p>${transactionValue.transactionTag}</p>
 
-form.reset()
+// </li>`)
+ 
 
-}
+// form.reset()
+
+// }
+//let transaction = transaction.value;
+
+
 class Wallet {
     constructor(name, currency,balance, description, transactions) {
         this.name = name;
@@ -78,17 +84,18 @@ class Currency {
 
 
 // arvin start section
-const ul = document.getElementById('ul-list');
-const note = document.getElementById('transaction-note');
-const tags = document.getElementById('transaction-tag');
-const income = document.getElementById('income');
-const expense = document.getElementById('expense');
-const amount = document.getElementById('make-transaction');
-const addTransaction = document.getElementById('add-transaction');
-const balance = document.getElementById('current-money');
-const form = document.getElementById('formName');
+const noWallet = document.getElementById('no-wallet');
+const crteateWallet = document.getElementById('crtWallet');
+const modal = document.getElementsByClassName('modal')
+const formAddBtn = document.querySelector('form')
+const formSec = document.getElementById('section1');
 
-
+document.addEventListener('DOMContentLoaded', load)
+    
+function load(){
+    formSec.classList.add('hidden');
+}
+//local storage
 const localStorageTransactions = JSON.parse(
     localStorage.getItem('transactions')
   );
@@ -96,72 +103,49 @@ const localStorageTransactions = JSON.parse(
   let transactions =
     localStorage.getItem('transactions') !== null ? localStorageTransactions : [];
 
-    class Transaction {
-        constructor ( id,date,amount, tags, note){
-            this.id=id;
-            this.date = date;
-            this.tags = tags;
-            this.note = note;
-            this.amount = amount;
-        }
-     addtransaction(e){
-            e.preventDefault();
-         if (this.note.value.trim() === '' || this.amount.value.trim() === '' || this.tags.value.trim() === '') {
-              alert('Please add a note ,tage ans amount!');
-         }
-         else {
-           const transaction = {
-               note: this.note.value,
-               amount: +this.amount.value,
-               tags:this.tags.value
-             };
-    
-        transactions.push(transaction);
-    
-        addTransactionDOM(transaction);
-    
-        updateLocalStorage();
-    
-        this.note.value = '';
-        this.amount.value = '';
-        this.tags.value ='';
-        }
-         }
-     addTransactionDOM(transaction){
-            const li = document.createElement('li');
-            li.innerHTML = `
-            ${Math.abs(transaction.amount)} <span>${
-            transaction.transNote}</span> <p>${transaction.transTag} </p>
-          `;
-        
-          ul.appendChild(li);
-     }
-     amountValues() {
-        const amounts = transactions.map(transaction => transaction.amount);
-      
-        const total = amounts.reduce((acc, item) => (acc += item), 0).toFixed(2);
-      
-        balance.innerText = `$${total}`;
-      }
-     
-       updateLocalStorage() {
-        localStorage.setItem('transactions', JSON.stringify(transactions));
-      }
-    }
-
-form.addEventListener('submit', addTransaction)
+crteateWallet.addEventListener('click',function(){
+    noWallet.classList.add('hidden'); 
+    formSec.classList.remove('hidden') ;
+    modal.remove();
+})
 
 
-class Income extends Transaction{
-    income = amounts
-    .filter(item => item > 0)
-    .reduce((acc, item) => (acc += item), 0)
-    .toFixed(2);
+form.addEventListener('submit',addNewTransaction)
+
+function addNewTransaction(e){
+e.preventDefault()
+
+addTransaction(transaction)
+
+updateLocalStorage()
+
+form.reset()
 }
-class Expense extends Transaction{
-     expense = (
-        amounts.filter(item => item < 0).reduce((acc, item) => (acc += item), 0) * -1)
+function addTransaction(transaction){
+    let addColor = valueTypeColor();
+const transactionValue = {
+
+    transaction: transaction.value,
+    transactionNote: transactionNote.value,
+    transactionTag: transactionTag.value
 }
+transactions.push(transactionValue);
+
+ul.insertAdjacentHTML("beforeend",`
+<li class="list-group-item mt-5 " >
+<div>
+<p class="d-flex float-right m-0" style="margin:0px padding: 0">${today.toLocaleString()}</p>
+<h2  class="${addColor}">${transactionValue.transaction}</h2></div>
+<p class="note">${transactionValue.transactionNote}</p>
+<span class="tag">${transactionValue.transactionTag}</span>
+
+</li>`)
+currentMoney.innerText = `${transactionValue.transaction}`
+
+}
+function updateLocalStorage() {
+    localStorage.setItem('transactions', JSON.stringify(transactions));
+  }
 
 
 // arvin end section
