@@ -15,7 +15,7 @@
 class Wallet{
     constructor(name, startingBalance, currency, description){
         this.name = name;
-        this.startingBalance = startingBalance;
+        this.startingBalance = parseInt(startingBalance);
         this.currency = currency;
         this.description = description;
         this.id = Math.floor(Math.random()*1000000);
@@ -23,7 +23,7 @@ class Wallet{
     transactions = [];
     get totalBalance(){
         let total = 0;
-        transactions.forEach(transaction => {
+        this.transactions.forEach(transaction => {
             if(transaction.type === 'income')
                 total += transaction.amount;
             else
@@ -33,8 +33,7 @@ class Wallet{
     }
 }
 (function main(){
-    const wallets = [wallet1, wallet2];
-    
+    const wallets = [];
     function storeToStorage(){
         localStorage.clear();
         const walletsString = JSON.stringify(wallets);
@@ -44,5 +43,9 @@ class Wallet{
     function retrieveFromStorage(){
         const walletsString = localStorage.getItem("wallets");
         wallets = JSON.parse(walletsString);
+    }
+    function walletIndex(id){
+        const index = wallets.findIndex(wallet => wallet.id === parseInt(id));
+        return index;
     }
 })()
