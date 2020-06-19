@@ -45,6 +45,9 @@ class Wallet{
     else{
         document.getElementsByClassName('empty')[0].style.display = "none"
     }
+    if(wallets.length === 0){
+        document.getElementById('wallets-select').style.display = "none";
+    }
     function storeToStorage(){
         const walletsString = JSON.stringify(wallets);
         localStorage.setItem("wallets", walletsString);
@@ -59,12 +62,27 @@ class Wallet{
         return index;
     }
     
+    function getWalletsNames(){
+        wallets.forEach(wallet => {
+            const name = wallet.name;
+            const id = wallet.id;
+            addWalletsToSelect(name, id);
+        })
+    }
+    function addWalletsToSelect(name, id){
+        const walletsSelect = document.getElementById('wallets-select');
+        walletsSelect.insertAdjacentHTML('beforeend',`
+        <option id=${id} value=${name}>${name}</option>
+        `)
+    }
+    getWalletsNames();
     walletForm.addEventListener('submit',(e) => {
         e.preventDefault();
         const name = document.getElementById('name').value;
         const description = document.getElementById('description').value;
         const iqd = document.getElementById('iqd');
         const usd = document.getElementById('usd');
+        const balance = document.getElementById('balance').value;
         let currency;
         if(iqd.checked){
             currency = iqd.value;
@@ -72,8 +90,6 @@ class Wallet{
         else{
             currency = usd.value;
         }
-        const balance = document.getElementById('balance').value;
-        console.log(currency)
         const newWallet = new Wallet(name, balance, currency, description);
         wallets.push(newWallet);
         storeToStorage();

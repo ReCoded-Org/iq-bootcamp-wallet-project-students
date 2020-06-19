@@ -1,5 +1,7 @@
 
-
+#wallets-select{
+    width: 10%
+}
 
 .middile{
     width: 75%;
@@ -19,10 +21,5 @@
     background-color: gray;
     color: honeydew;
     margin-top: 2em;
-}
-@media only screen (max-width:480){
-    #balance{
-        font-size: 3000px
-    }
 }
 
