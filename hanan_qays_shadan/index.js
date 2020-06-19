@@ -10,9 +10,9 @@ const CurrencyGroup = document.querySelectorAll('input[name="CurrencyGroup"]')
 const balanceInput = document.getElementById('Balance-input')
 const descriptionInput = document.getElementById('Desc-input');
 const walletForm = document.getElementById("walletForm")
-
-
-
+const buttonDrop=document.getElementById('button-drop')
+const noWalletHide=document.getElementById('no-wallet-hide')
+const walletHide=document.getElementById('wallet-hide')
 
 
 const form = document.getElementById("formName")
@@ -308,11 +308,22 @@ walletForm.addEventListener('submit', (e) => {
 
     addWallet();
 
+    $('#CreateWallet').modal('hide')
+
+
 });
 
+function walletChecking(){
+   if(Wallet.getWalletsLocalStorage()!==null){
+       noWalletHide.style.display="none" 
 
+    } else{
+        buttonDrop.style.display="none"
+        walletHide.style.display="none"
 
-
+    } 
+}
+  walletChecking();  
 
 
 // Shadan End

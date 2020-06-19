@@ -23,17 +23,21 @@
 
             <!-- UserButton-->
             <div class="dropdown float-right mr-3">
-                <button type="button" class="btn btn-info dropdown-toggle btnDrop" data-toggle="dropdown">
+                <button type="button" id="button-drop" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
                     Wallet
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Create wallet</a>
+                    <button class="dropdown-item" data-toggle="modal" data-target="#CreateWallet">Create wallet</button>
 
                 </div>
             </div>
         </nav>
     </header>
-    <div class="bg text-center mt-2">
+    <section>
+
+   
+    <div id="no-wallet-hide">
+       <div class="bg text-center mt-2">
 
         <i class='fas fa-ghost Ghost-Icon'></i>
         <div class="wallet mt-4">
@@ -43,9 +47,9 @@
                 Create Wallet</button>
         </div>
 
-
-
+    </div>  
     </div>
+   
 
     <!-- form-->
     <!-- Modal -->
@@ -92,7 +96,7 @@
                                     <label for="Balance-input">Balance</label>
                                 </div>
                                 <div class="col-9">
-                                    <input type="text" id="Balance-input" class="w-100">
+                                    <input type="number" id="Balance-input" class="w-100">
                                 </div>
                             </div>
                             <div class="row">
@@ -106,7 +110,7 @@
                         </div>
                         <div class="modal-footer">
                             <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Close">
-                            <input type="submit" id="btnForm" class="btn btn-info" value="Create Wallet">
+                            <input type="submit" id="btnForm" class="btn btn-info" value="Create Wallet" onClick="window.location.reload()">
                         </div>
                     </form>
                 </div>
@@ -116,7 +120,7 @@
     </div>
 
 
-
+</section>
 
     <!-- nav bar -->
     <!-- https://getbootstrap.com/docs/4.0/components/navbar/ -->
@@ -140,7 +144,7 @@
 
     <!-- Boot strap grid for the form -->
     <!-- List  -->
-    <section>
+    <section id="wallet-hide">
         <div class="container">
             <h1 style="margin: 50px 0px;">Wallet Balance: <span id="current-money">$0.00</span></h1>
 
@@ -224,6 +228,8 @@ https://stackoverflow.com/questions/27148543/symfony2-display-bootstrap-switch-b
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
     <script src="index.js"></script>
 </body>
 

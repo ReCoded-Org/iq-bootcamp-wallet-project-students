@@ -13,18 +13,16 @@
 .row{
     height:60px;
 }
-.btnDrop{
+#button-drop{
     padding: 8px 30px 8px 30px;
     font-size: 18px;
-    
+
 }
 .Ghost-Icon{
     font-size: 23rem;
     color: #000000;;
 }
-#noWallet-div{
-    display: none;
-}
+
 
 
 
