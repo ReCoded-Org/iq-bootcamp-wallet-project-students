@@ -32,10 +32,20 @@ class Wallet{
         return this.startingBalance + total;
     }
 }
-(function main(){
-    const wallets = [];
+//(function main(){
+    let wallets = [];
+    const walletForm = document.getElementById("walletForm");
+    //const transactionForm = document.getElementById("");
+    if(localStorage.length !==0){
+        retrieveFromStorage()
+    }
+    if(wallets.length === 0){
+        document.getElementsByClassName('wallet')[0].style.display = "none"
+    }
+    else{
+        document.getElementsByClassName('empty')[0].style.display = "none"
+    }
     function storeToStorage(){
-        localStorage.clear();
         const walletsString = JSON.stringify(wallets);
         localStorage.setItem("wallets", walletsString);
     }
@@ -48,4 +58,26 @@ class Wallet{
         const index = wallets.findIndex(wallet => wallet.id === parseInt(id));
         return index;
     }
-})()
+    
+    walletForm.addEventListener('submit',(e) => {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const description = document.getElementById('description').value;
+        const iqd = document.getElementById('iqd');
+        const usd = document.getElementById('usd');
+        let currency;
+        if(iqd.checked){
+            currency = iqd.value;
+        }
+        else{
+            currency = usd.value;
+        }
+        const balance = document.getElementById('balance').value;
+        console.log(currency)
+        const newWallet = new Wallet(name, balance, currency, description);
+        wallets.push(newWallet);
+        storeToStorage();
+    })
+
+    
+//})()
