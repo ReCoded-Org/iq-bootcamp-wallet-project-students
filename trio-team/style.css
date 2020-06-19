@@ -1,0 +1,30 @@
+
+#balance{
+    font-size: 30px;
+}
+
+.middile{
+    width: 75%;
+    height: auto;
+    float: right;
+    align: center;
+}
+.space{
+    margin-left: 40px;
+}
+.coll{
+    width: 250px;
+    margin-left: 0;
+    margin-right: 0px;
+}
+.color{
+    background-color: gray;
+    color: honeydew;
+    margin-top: 2em;
+}
+@media only screen (max-width:480){
+    #balance{
+        font-size: 3000px
+    }
+}
+

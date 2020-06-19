@@ -2,9 +2,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
     <title>Wallet App</title>
 </head>
-<body>
+<body >
+<!--SARA SECTION -->
+<section >
+    <div class="middile">
+        
+        <label id="balance">Wallet Balance: 
+            <form >
+
+        </label>
+    </div>
+
     
+ <div class="middile" >
+      
+        <h6>Make a transaction</h6>
+        <div class="input-group mb-3">
+  <div class="input-group-prepend itemPosition" >
+    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+    <span class="input-group-text">$</span>
+    
+  </div>
+  
+  <div class="input-group-append">
+    <span class="input-group-text">.00</span>
+     <div class="space">
+        <div class="btn-group btn-group-toggle green" data-toggle="buttons">
+            <label class="btn btn-secondary ">
+            <input type="radio" name="options" id="option1" autocomplete="off" checked> Income
+            </label>
+            <label class="btn btn-secondary">
+            <input type="radio" name="options" id="option2" autocomplete="off"> Expence
+            </label>
+
+        </div>
+    </div>
+</div>
+</div>
+ 
+<form>
+    <div class="form-row">
+        
+      <div class="col ">
+        <label>Transaction Notes</label>
+        <input type="text" class="form-control coll" placeholder="Lunch">
+      </div>
+      <div class="col">
+        <label>Transaction Tags</label>
+        <input type="text" class="form-control coll" placeholder="Food, Lifestyle">
+      </div>
+      <div class="col">
+        <button  class="form-control coll color">Add Transaction</button>
+    </div>
+  </form>
+    <ul class="transaction"></ul>
+</div>
+
+  
+    
+    
+
+</section>
 </body>
 </html>
