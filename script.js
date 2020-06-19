@@ -29,10 +29,6 @@ x.on('show.bs.modal', function (event) {
 
 
 
-
-
-
-
 class Wallet {
 
 }

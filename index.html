@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="icon" href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>Sticky Footer Navbar Template for Bootstrap</title>
+    <title>Wallet Project</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
 
@@ -27,43 +27,16 @@
     <header>
         <!-- Fixed navbar -->
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/#">Wallet
-                App</a>
-            <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link"
-                            href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/#">Home <span
-                                class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link"
-                            href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled"
-                            href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/#">Disabled</a>
-                    </li>
-                </ul>
-                <form class="form-inline mt-2 mt-md-0" wtx-context="14D80903-B0F6-41E9-814B-FE215F5C7F4A">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
-                        wtx-context="E1671B46-27AE-4912-91FE-4FA4C849D010">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </div>-->
+            <h1 class="navbar-brand">Wallet App</h1>
         </nav>
     </header>
 
     <!-- Begin page content -->
-    <main role="main" class='d-flex flex-column container justify-content-center align-items-center align-self-center'>
-        <div class="p-2"> <img src='./spooky.png' alt="sorry, you have no wallets"></div>
+    <main role="main" class='d-flex flex-column container justify-content-center align-items-center'>
+        <div class="p-2"> <img src='./spooky.png' alt="sorry, you have no wallets" id="ghost"></div>
         <div class="p-2 align-self-center col text-center">
-            <h2>Ooops!</h2>
-            <p>You have no wallets. Start by creating one..</p>
+            <h2 id="oops">Ooops!</h2>
+            <p id="comment">You have no wallets. Start by creating one..</p>
             <form id='create-wallet' class="form-inline mt-2 mt-md-0 d-flex flex-column"
                 wtx-context="14D80903-B0F6-41E9-814B-FE215F5C7F4A">
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal"
@@ -77,19 +50,57 @@
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">New message</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span class="close" aria-hidden="true">&times;</span>
+                                    <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
                                 <form>
-                                    <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                        <input type="text" class="form-control" id="recipient-name">
+                                    <div class="form-group row">
+                                        <label for="name" class="col-sm-2 col-form-label">Name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="name" placeholder="Type a name">
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="message-text" class="col-form-label">Message:</label>
-                                        <textarea class="form-control" id="message-text"></textarea>
+
+                                    <fieldset class="form-group">
+                                        <div class="row">
+                                            <legend class="col-form-label col-sm-2 pt-0">Currency</legend>
+                                            <div class="col-sm-10">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="currency" id="US"
+                                                        value="US" checked>
+                                                    <label class="form-check-label" for="Us">
+                                                        US Dollar($)
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="currency"
+                                                        id="IQD" value="IQD">
+                                                    <label class="form-check-label" for="IQD">
+                                                        Iraqi Dinar (IQD)
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+
+                                    <div class="form-group row">
+                                        <label for="balance" class="col-sm-2 col-form-label">Balance</label>
+                                        <div class="col-sm-10">
+                                            <input type="number" class="form-control" id="balance" placeholder="0">
+                                        </div>
                                     </div>
+
+
+                                    <div class="form-group row">
+                                        <label for="description" class="col-sm-2 col-form-label">Description</label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" id="description"></textarea>
+
+                                        </div>
+                                    </div>
+
                                 </form>
                             </div>
                             <div class="modal-footer">
@@ -99,8 +110,6 @@
                         </div>
                     </div>
                 </div>
-            </form>
-        </div>
     </main>
 
     <footer class="footer">
