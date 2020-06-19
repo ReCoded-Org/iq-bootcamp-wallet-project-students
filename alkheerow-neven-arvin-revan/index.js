@@ -48,6 +48,7 @@ class Wallet {
         this.description = description;
         this.transactions = transactions
     }
+    
 
 }
 
