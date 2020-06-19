@@ -3,8 +3,6 @@
 const WALLETS_KEY = 'Wallets';
 const SELECTED_WALLET_KEY = 'Selected_Wallet';
 
-
-
 const nameInput = document.getElementById('user-name')
 const CurrencyGroup = document.querySelectorAll('input[name="CurrencyGroup"]')
 const balanceInput = document.getElementById('Balance-input')
@@ -50,10 +48,11 @@ class Wallet {
         Wallet.setSelectedWalletKeyLocalStorage(wallets[this.id]);
     }
 
-    addNewTransaction(type, amount, date, note, tags) {
+    addNewTransaction(transactionType, amount, date, note, tags) {
         let transaction;
-        if (type === 'expense') {
+        if (transactionType === 'expense') {
             transaction = new Expense(amount, date, note, tags);
+            
 
         } else {
             transaction = new Income(amount, date, note, tags);
@@ -241,9 +240,6 @@ reloadLocalStorage();
 // Qays End
 
 
-
-
-
 // Objects
 //                                            String Object   number  string
 // Wallet     properties  "id random number"  Name   Currency Balance Description transactions
@@ -267,13 +263,7 @@ reloadLocalStorage();
 // method updateBalance function(balance) => newBalance 
 // super.renderTransaction() renderTransaction() only the price text
 
-
-
 // Currency    properties id name symbol 
-
-
-
-
 
 // Shadan Start
 
@@ -328,15 +318,9 @@ function walletChecking(){
 
 // Shadan End
 
-
-
-
-
-
-
-
 // Hanan Start
 
+let transactionType = "income"
 
 form.addEventListener('submit', addNewTransaction)
 
@@ -350,13 +334,18 @@ function addNewTransaction(e) {
     console.log(selectedWallet);
     // 'expense'   or 'income'
 
-    selectedWallet.addNewTransaction('expense', amount, today, note, tags);
+    selectedWallet.addNewTransaction(transactionType, amount, today, note, tags);
     selectedWallet.renderTransactions(ul);
+
 
     form.reset()
 
 }
 
+
+function selectTransactionType(type = 'income'){
+transactionType = type
+}
 
 // Hanan End
 
