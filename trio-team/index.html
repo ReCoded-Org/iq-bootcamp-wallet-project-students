@@ -6,75 +6,118 @@
     <link rel="stylesheet" href="style.css">
     <title>Wallet App</title>
 </head>
-<<<<<<< HEAD
-<body>
-
-<script src="./app.js"></script>
-||||||| ac1ec68
-<body>
-    
-=======
 <body >
-<!--SARA SECTION -->
-<section >
-    <div class="middile">
-        
-        <label id="balance">Wallet Balance: 
-            <form >
 
-        </label>
-    </div>
-
-    
- <div class="middile" >
-      
-        <h6>Make a transaction</h6>
-        <div class="input-group mb-3">
-  <div class="input-group-prepend itemPosition" >
-    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-    <span class="input-group-text">$</span>
-    
-  </div>
-  
-  <div class="input-group-append">
-    <span class="input-group-text">.00</span>
-     <div class="space">
-        <div class="btn-group btn-group-toggle green" data-toggle="buttons">
-            <label class="btn btn-secondary ">
-            <input type="radio" name="options" id="option1" autocomplete="off" checked> Income
-            </label>
-            <label class="btn btn-secondary">
-            <input type="radio" name="options" id="option2" autocomplete="off"> Expence
-            </label>
-
+<header>
+    <nav class="navbar navbar-light bg-dark">
+        <a class="navbar-brand text-light" href="#">Wallet App</a>
+      </nav>
+</header>
+<main>
+    <section class="empty">
+        <figure class="d-flex justify-content-center pt-5">
+            <img src="./img/gitscrum-ooops.svg"  class="pt-5" style=" width:500px; text-align: center " alt="Ooops For Money">
+            
+        </figure>
+        <div class="container">
+            <article class=" d-flex justify-content-center align-items-center flex-column  ">
+                <h3 class="">Ooops!</h3>
+                <p  class="">You have no wallets. start by creating one</p>             
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Create wallet
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Create a new wallet</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="walletForm">
+                                    <div class="form-group">
+                                      <label for="name">Name</label>
+                                      <input type="text" class="form-control" id="name">
+                                    </div>
+                                    <div class="form-group" id="currency">
+                                        <label for="">Currency</label>
+                                            <input type="radio" name="currency" id="usd" value="USD">
+                                            <label for="usd">USD</label>
+                                            <input type="radio" name="currency" id="iqd" value="IQD">
+                                            <label for="iqd">IQD</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="balance">Balance</label>
+                                        <input type="text" class="form-control" id="balance">  
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">Description</label>
+                                        <input type="text" class="form-control" id="description">
+                                    </div>
+                                    <div class="">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Create Wallet</button>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                        </div>
+                        </div>
+                    </div>
+            </article>
         </div>
-    </div>
-</div>
-</div>
- 
-<form>
-    <div class="form-row">
+    </section>
+    <!--SARA SECTION -->
+    <section class="wallet" >
+        <div class="middile" >
+            <h6>Make a transaction</h6>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend itemPosition" >
+                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-text">$</span>
+                </div>
+
+                <div class="input-group-append">
+                    <span class="input-group-text">.00</span>
+                    <div class="space">
+                        <div class="btn-group btn-group-toggle green" data-toggle="buttons">
+                            <label class="btn btn-secondary ">
+                            <input type="radio" name="options" id="option1" autocomplete="off" checked> Income
+                            </label>
+                            <label class="btn btn-secondary">
+                            <input type="radio" name="options" id="option2" autocomplete="off"> Expence
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
         
-      <div class="col ">
-        <label>Transaction Notes</label>
-        <input type="text" class="form-control coll" placeholder="Lunch">
-      </div>
-      <div class="col">
-        <label>Transaction Tags</label>
-        <input type="text" class="form-control coll" placeholder="Food, Lifestyle">
-      </div>
-      <div class="col">
-        <button  class="form-control coll color">Add Transaction</button>
-    </div>
-  </form>
-    <ul class="transaction"></ul>
-</div>
+            <form>
+                <div class="form-row">
+                    
+                <div class="col ">
+                    <label>Transaction Notes</label>
+                    <input type="text" class="form-control coll" placeholder="Lunch">
+                </div>
+                <div class="col">
+                    <label>Transaction Tags</label>
+                    <input type="text" class="form-control coll" placeholder="Food, Lifestyle">
+                </div>
+                <div class="col">
+                    <button  class="form-control coll color">Add Transaction</button>
+                </div>
+            </form>
+            <ul class="transaction"></ul>
+        </div>
+    </section>
+</main>
 
-  
-    
-    
-
-</section>
->>>>>>> 4539cbd248cd5a6c62ac762406f08b4f4170a117
+    <script src="./app.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </body>
 </html>
