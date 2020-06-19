@@ -60,10 +60,10 @@
           <div class="modal-body">
             <form>
               <div class="form-group row">
-                <label for="inputName" class="col-sm-2 col-form-label"
+                <label for="inputName" class="col-sm-2 col-form-label" 
                   >Name:</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="inputName" />
+                  <input type="text" class="form-control" id="inputName" required />
                 </div>
               </div>
               <fieldset class="form-group">
@@ -129,7 +129,7 @@
             >
               Close
             </button>
-            <button type="button" class="btn btn-primary">Create wallet</button>
+            <button type="button" id="crtWallet" class="btn btn-primary">Create wallet</button>
           </div>
         </div>
       </div>
@@ -142,31 +142,31 @@
         <h1 class="text-white ml-3">Wallet App</h1>
       </nav>
     </header>
+    <div id="no-wallet">
     <div
-      class="container d-flex justify-content-center flex-column align-items-center"
-    >
+      class="container d-flex justify-content-center flex-column align-items-center" >
 
       <img class="mt-5" src="imgs/Ghost1.jpg" alt="oops-ghost" width="250px" />
 
-      <h2 class="mt-5">Ooop!</h2>
-      <h4 class="mt-3">
+      <h2 class="mt-5 display-4">Ooop!</h2>
+      <h4 class="mt-3 lead">
         You have no Wallet.Start by creating one
       </h4>
       <button
-        class="btn btn-primary mt-3"
+        class="btn btn-secondary mt-3"
         data-toggle="modal"
         data-target="#addData"
       >
         Creat New Wallet
       </button>
     </div>
-
+</div>
 
 
     <!-- grid for the form  -->
 
     <!-- list -->
-    <section >
+    <section id="section1">
       <div class="container ">
           <h1 style="margin: 50px 0px;">Wallet Balance: <span id="current-money">$0.00</span></h1>
   
@@ -185,9 +185,16 @@
                 </div>
   
                 <div class="col-md-4 mb-3" style="margin:30px 0 0 !important;">
-                  <div class="input-group-prepend">
-                    <button class="form-control btn btn-outline-success " type="button" id="income">Income</button>
-                    <button class="form-control btn btn-outline-danger" type="button" id="expense">Expense</button>
+                  <div class="d-flex">
+                    <div class="dropdown mr-1">
+                      <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                        Transaction Type
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                        <a class="dropdown-item" id="income" href="#">Income</a>
+                        <a class="dropdown-item" id="expense" href="#">Expense</a>
+                      </div>
+                    </div>
                   </div>
                 </div>
   
@@ -198,14 +205,14 @@
                   <div class="col-md-4 mb-3">
                     <label for="transactionNote">Transaction Notes:</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="transaction-note" placeholder="write Note" required >
+                        <input type="text" class="form-control " id="transaction-note" placeholder="write Note" required >
                     </div>
                   </div>
    
                   <div class="col-md-4 mb-3">
                       <label for="transactionTag">Transaction tags:</label>
                       <div class="input-group">
-                          <input type="text" class="form-control" id="transaction-tag" placeholder="Enter tags"  >
+                          <input type="text" class="form-control " id="transaction-tag" placeholder="Enter tags"  >
                       </div>
                   </div>
   
@@ -220,7 +227,7 @@
   
       <section>
         <div class="container">
-           <div class="col-md-8 col-lg-6">
+           <div class="col-md-8 col-lg-6 mw-100">
                <ul id="ul-list" class="list-group list-group-flush">
                  
                </ul>
