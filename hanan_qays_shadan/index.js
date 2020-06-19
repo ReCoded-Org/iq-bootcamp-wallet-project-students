@@ -8,9 +8,9 @@ const CurrencyGroup = document.querySelectorAll('input[name="CurrencyGroup"]')
 const balanceInput = document.getElementById('Balance-input')
 const descriptionInput = document.getElementById('Desc-input');
 const walletForm = document.getElementById("walletForm")
-const buttonDrop=document.getElementById('button-drop')
-const noWalletHide=document.getElementById('no-wallet-hide')
-const walletHide=document.getElementById('wallet-hide')
+const buttonDrop = document.getElementById('button-drop')
+const noWalletHide = document.getElementById('no-wallet-hide')
+const walletHide = document.getElementById('wallet-hide')
 
 
 const form = document.getElementById("formName")
@@ -45,14 +45,14 @@ class Wallet {
         this._updateLocalStorage();
         console.log();
 
-        Wallet.setSelectedWalletKeyLocalStorage(wallets[this.id]);
+        Wallet.setSelectedWalletKeyLocalStorage(wallets[this.id].walletKey);
     }
 
     addNewTransaction(transactionType, amount, date, note, tags) {
         let transaction;
         if (transactionType === 'expense') {
             transaction = new Expense(amount, date, note, tags);
-            
+
 
         } else {
             transaction = new Income(amount, date, note, tags);
@@ -98,9 +98,13 @@ class Wallet {
         const wallet = new Wallet(walletInfo.id, walletInfo.name, walletInfo.currency, walletInfo.balance, walletInfo.description, transactions);
         return wallet;
     }
-    static setSelectedWalletKeyLocalStorage(wallet) {
-        localStorage.setItem(SELECTED_WALLET_KEY, JSON.stringify(wallet.walletKey));
+
+    static setSelectedWalletKeyLocalStorage(walletKey) {
+        console.log(walletKey);
+
+        localStorage.setItem(SELECTED_WALLET_KEY, JSON.stringify(walletKey));
     }
+
 
 
     static getWalletObjectFromLocalStorage(key) {
@@ -152,7 +156,7 @@ class Transaction {
 
 
     html() {
-        const badges = this.tags.reduce((acc, tag) => acc + `<span class="badge badge-pill badge-dark">${tag}</span>`, '');
+        const badges = this.tags.reduce((acc, tag) => acc + ` <span class="badge badge-pill badge-dark">${tag}</span> `, '');
         //   <div class="dropdown-divider"></div>
 
         const options = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', };
@@ -165,14 +169,15 @@ class Transaction {
         const dateString = this.date.toLocaleDateString('en-US', options).replace(',', '').replace(',', '') + ' | ' + this.date.toLocaleTimeString('en-US',)
 
         return `<div class="list-group-item">
-                    <div class="col">
-                        <div class="row  justify-content-between">
-                            <div class="text-${this.amountColor}">${this.amount}</div><div class=>${dateString}</div>
-                        </div>
-                        <div class="">${this.note}</div>
-                        <div class="">${badges}</div>
-                    </div>
-                </div>`;
+        <div class="col">
+            <div>
+                <div class="h2 text-${this.amountColor}">${this.amount}</div><div class="float-right">${dateString}</div>
+            </div>
+            <div class="">${this.note}</div>
+            <p class="h5">${badges}</p>
+        </div>
+    </div>`;
+
     }
 
 
@@ -214,7 +219,7 @@ function reloadLocalStorage() {
         //display no wallets 
         console.log('hide empty message');
         //display balncae and curreny and form
-        currentMoney.innerText = selectedWallet.currency.symbol + selectedWallet.balance;
+        currentMoney.innerText = selectedWallet.currency.symbol +" "+ selectedWallet.balance;
         currentSymbol.innerText = selectedWallet.currency.symbol;
         currentNumber.innerText = selectedWallet.balance;
         selectedWallet.renderTransactions(ul);
@@ -228,6 +233,25 @@ function reloadLocalStorage() {
         // Wallet.setSelectedWalletKeyLocalStorage(walletKey)
 
 
+
+
+
+        const btnDrop = document.getElementsByClassName('btnDrop')[0];
+        btnDrop.innerText = selectedWallet.name + '\'s wallet'
+        const dropdownMenu = document.getElementsByClassName('dropdown-menu')[0];
+
+        dropdownMenu.innerHTML = '';
+        wallets.forEach(wallet => {
+            if (wallet.walletKey != selectedWallet._walletKey())
+                dropdownMenu.insertAdjacentHTML("beforeend", `<a class="dropdown-item" href="#" onclick="setSelectedWalletKeyLocalStorage('${wallet.walletKey}')">${wallet.name}</a>`);
+        });
+        dropdownMenu.insertAdjacentHTML("beforeend", `<div class="dropdown-divider"></div>`)
+        dropdownMenu.insertAdjacentHTML("beforeend", ` <a class="dropdown-item" href="#" data-toggle="modal" data-target="#CreateWallet">Create wallet</a>`)
+
+
+
+
+
     } else {
 
 
@@ -236,7 +260,10 @@ function reloadLocalStorage() {
     }
 }
 reloadLocalStorage();
-
+function setSelectedWalletKeyLocalStorage(walletKey) {
+    Wallet.setSelectedWalletKeyLocalStorage(walletKey);
+    reloadLocalStorage();
+}
 // Qays End
 
 
@@ -268,25 +295,36 @@ reloadLocalStorage();
 // Shadan Start
 
 
-function RadioCheck() {
+function getCurrency() {
     let selectedValue;
     for (const val of CurrencyGroup) {
         if (val.checked) {
             selectedValue = val.value;
             break;
-
         }
-
     }
-    return selectedValue
+    let currency ;
+    switch (selectedValue) {
+        case "Dollars":
+             currency =new Currency(0, 'Dollar', '$');
+            break;
+
+        case "Dinars":
+            currency =new Currency(1, 'Dinars', 'IQD');
+
+            break;
+    }
+
+
+    return currency
 }
 function addWallet() {
     const name = nameInput.value;
     const balance = parseInt(balanceInput.value);
     const description = descriptionInput.value;
 
-
-    const wallet = new Wallet(null, name, new Currency(0, 'Dollar', '$'), balance, description);
+    const currency = getCurrency();
+    const wallet = new Wallet(null, name, currency, balance, description);
     console.log(wallet);
     reloadLocalStorage();
 
@@ -297,23 +335,23 @@ walletForm.addEventListener('submit', (e) => {
     console.log('sduhfgsdghfgbsedhjgfbgsejdh');
 
     addWallet();
+    walletForm.reset();
 
     $('#CreateWallet').modal('hide')
 
-
 });
 
-function walletChecking(){
-   if(Wallet.getWalletsLocalStorage()!==null){
-       noWalletHide.style.display="none" 
+function walletChecking() {
+    if (Wallet.getWalletsLocalStorage() !== null) {
+        noWalletHide.style.display = "none"
 
-    } else{
-        buttonDrop.style.display="none"
-        walletHide.style.display="none"
+    } else {
+        buttonDrop.style.display = "none"
+        walletHide.style.display = "none"
 
-    } 
+    }
 }
-  walletChecking();  
+walletChecking();
 
 
 // Shadan End
@@ -335,16 +373,15 @@ function addNewTransaction(e) {
     // 'expense'   or 'income'
 
     selectedWallet.addNewTransaction(transactionType, amount, today, note, tags);
-    selectedWallet.renderTransactions(ul);
-
+    reloadLocalStorage();
 
     form.reset()
 
 }
 
 
-function selectTransactionType(type = 'income'){
-transactionType = type
+function selectTransactionType(type = 'income') {
+    transactionType = type
 }
 
 // Hanan End
