@@ -3,4 +3,27 @@
     padding: 0;
     box-sizing: border-box;
 }
+.hidden{
+   /* visibility: hidden;
+    z-index: -10;*/
+    display: none;
+}
 
+#income:hover{
+    background-color:green;
+    color: white;
+}
+#expense:hover{
+    background-color:red;
+    color: white;
+}
+.tag{
+    background-color: rgb(71, 76, 80);
+    color: white;
+    padding: 10px;
+    border-radius: 25%;
+    font-size: 15px;
+}
+.note{
+    font-size: 20px;
+}
