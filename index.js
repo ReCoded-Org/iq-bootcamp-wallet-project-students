@@ -14,6 +14,13 @@ let noWallet = document.getElementById('no-wallet');
 let walletBalance = document.getElementById('wallet-balance');
 let moneyAmount = document.getElementById('money-amount');
 let moneyType = document.getElementById('money-type');
+let transuction = document.getElementById('make-transaction');
+let transuctionNote = document.getElementById('transaction-note');
+let transuctionTag = document.getElementById('transaction-tag');
+let transuctionForm = document.getElementById('transuction-form');
+let transuctionList = document.getElementById('ul-list');
+let incomeBtn = document.getElementById('income-btn');
+let expenseBtn = document.getElementById('expense-btn');
 
 
 // apearing the modal
@@ -43,13 +50,15 @@ function addtoLocal(){
 function selectedUser(index){
     let array = JSON.parse(localStorage.getItem("array")) || [];
     let selectedUser = array[index];
-    
+    selectedUser.index = index;
+    selectedUser.transactions = selectedUser.transactions || [];
+
     localStorage.setItem("selectedUser", JSON.stringify(selectedUser));
     viewUpdater();
+    transactionsUpdater();
 }
 
 function viewUpdater(){
-    
     let array = JSON.parse(localStorage.getItem("array")) || [];
 
     if(array.length > 0){
@@ -75,17 +84,108 @@ function viewUpdater(){
         walletView.classList.add('hiding');
     }
 }
+
+let transactionType = 'income';
+function transactionsUpdater(){
+    transuctionList.innerHTML = "";
+    let array = JSON.parse(localStorage.getItem("array")) || [];
+    let selectedUser = JSON.parse(localStorage.getItem("selectedUser")) || array[0];
+    const transactions  = selectedUser.transactions || [];
+    transactions.forEach(element=>(
+        transuctionList.insertAdjacentHTML('beforeend',`<li class="list-group-item">
+        <p class="float-right">${element.date}</p><h3 style="${element.type === 'income' ? 'color:green': 'color:red'}">${element.value}</h3><p>${element.note}</p><p>${element.tags}</p>
+        </li>`)
+    ))
+}
+function displayLi(e){
+    e.preventDefault();
+    if(transactionType === "income"){
+        Income();
+    }
+    else{
+        Expense();
+    }
+    transuctionForm.reset();
+    transactionsUpdater();
+}
+
+function transactionTypeSetter(type = 'income'){
+    transactionType = type;
+}
+
+function Income(){
+    let array = JSON.parse(localStorage.getItem("array")) || [];
+    let selectedUser = JSON.parse(localStorage.getItem("selectedUser")) || array[0];
+   let income = parseInt(transuction.value,10) + parseInt(selectedUser.Balance,10);
+   selectedUser.Balance = income;
+
+    let Tags =transuctionTag.value;
+    let splitedTag = Tags.split(',')
+    let badges = splitedTag.reduce((acc, tag) => acc + `<span class="badge badge-dark">${tag}</span>    ` , ' ');
+    let date = new Date();
+    let options = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', };
+    let dateString = date.toLocaleDateString('en-US', options).replace(',', '').replace(',', '') + ' | ' +  date.toLocaleTimeString('en-US',)
+    
+    selectedUser.transactions = selectedUser.transactions || [];
+    selectedUser.index = selectedUser.index || 0;
+   selectedUser.transactions.push({
+       type: 'income',
+       value: transuction.value,
+       tags: badges,
+       date: dateString,
+       note:transuctionNote.value
+   });
+
+   localStorage.setItem('selectedUser',JSON.stringify(selectedUser));
+  
+   array[selectedUser.index].Balance =  selectedUser.Balance;
+   array[selectedUser.index].transactions =  selectedUser.transactions;
+
+   localStorage.setItem('array', JSON.stringify(array))
+   balanceUpdater()
+}
+function Expense(){
+    let array = JSON.parse(localStorage.getItem("array")) || [];
+    let selectedUser = JSON.parse(localStorage.getItem("selectedUser"))  || array[0];
+    
+    let expense = parseInt(selectedUser.Balance,10) - parseInt(transuction.value,10);
+    selectedUser.Balance = expense;
+
+    let Tags =transuctionTag.value;
+    let splitedTag = Tags.split(',')
+    let badges = splitedTag.reduce((acc, tag) => acc + `<span class="badge badge-dark">${tag}</span>    ` , ' ');
+    let date = new Date();
+    let options = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', };
+    let dateString = date.toLocaleDateString('en-US', options).replace(',', '').replace(',', '') + ' | ' +  date.toLocaleTimeString('en-US',)
+
+    selectedUser.transactions = selectedUser.transactions || [];
+    selectedUser.index = selectedUser.index || 0;
+   selectedUser.transactions.push({
+       type: 'expense',
+       value: transuction.value,
+       tags: badges,
+       date: dateString,
+      note:transuctionNote.value
+   });
+    
+    localStorage.setItem('selectedUser',JSON.stringify(selectedUser));
+    
+    array[selectedUser.index].Balance =  selectedUser.Balance;
+    array[selectedUser.index].transactions =  selectedUser.transactions;
+
+    localStorage.setItem('array', JSON.stringify(array));
+    balanceUpdater()
+}
+function balanceUpdater(){
+    let selectedUser = JSON.parse(localStorage.getItem("selectedUser")) || array[0];
+    walletBalance.innerText = `Wallet Balance : ${selectedUser.Currency} ${selectedUser.Balance}`
+    moneyAmount.innerText = `${selectedUser.Balance}`;
+    moneyType.innerText = `${selectedUser.Currency}` ;
+}
+
 createbtn.addEventListener('click',addtoLocal);
 window.onload = function(){
     viewUpdater();
+    transactionsUpdater();
 }
-
- // ahmeds section
-
- //end of ahmed section  
-
-
- 
-// dunia section 
-
-// end of dunia section  
+transuctionForm.addEventListener('submit',displayLi)

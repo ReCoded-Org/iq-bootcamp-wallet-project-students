@@ -19,9 +19,7 @@
             Wallets
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="wallets-dropdown">
-            <!-- <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a> -->
+           
           </div>
         </div>
 
@@ -94,7 +92,7 @@
   <div class="container hiding" id="wallet-view">
     <h1 style="margin: 50px 0px;" id="wallet-balance"></h1>
 
-    <form name="formName">
+    <form id = "transuction-form">
         <div class="form-row">
 
           <div class="col-md-4 mb-4">
@@ -110,8 +108,8 @@
 
           <div class="col-md-4 mb-3" style="margin:30px 0 0 !important;">
             <div class="input-group-prepend">
-              <button class="form-control btn btn-outline-success " type="button">Income</button>
-              <button class="form-control btn btn-outline-danger" type="button">Expense</button>
+              <button class="form-control btn btn-outline-success " type="button" id="income-btn" onclick="transactionTypeSetter('income')">Income</button>
+              <button class="form-control btn btn-outline-danger" type="button" id="expense-btn" onclick="transactionTypeSetter('expense')"> Expense</button>
             </div>
           </div>
 
@@ -121,14 +119,14 @@
         <div class="form-row">
 
             <div class="col-md-4 mb-3">
-              <label for="transactionNote">Transaction Notes:</label>
+              <label for="transaction-note">Transaction Notes:</label>
               <div class="input-group">
                   <input type="text" class="form-control" id="transaction-note" placeholder="write Note">
               </div>
             </div>
 
             <div class="col-md-4 mb-3">
-                <label for="transactionTag">Transaction tags:</label>
+                <label for="transaction-tag">Transaction tags:</label>
                 <div class="input-group">
                     <input type="text" class="form-control" id="transaction-tag" placeholder="Enter tags" >
                 </div>
@@ -138,28 +136,28 @@
               <input type="submit" class="form-control mb-2 btn btn-secondary" value="Add Transaction">
              </div>
              <div class="col">
-              <button type="button" class="btn btn-info p-2 m-3" id="myInput2">Create wallet</button>
+              <button type="submit" class="btn btn-info p-2 m-3" id="myInput2">Create wallet</button>
             </div>
                              
-          </div>
+        </div>
+    </form>
 
   </div>
+  
+  <section>
+    <div class="container">
+        <ul id="ul-list" class="list-group list-group-flush">
 
-<!-- ahmeds section -->
-
-<!-- end of ahmed section -->
-
-
-<!-- dunia section -->
-
-<!-- end of dunia section -->
+        </ul>
+    </div>
+</section>
 
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    
+
 <script src="./index.js"></script>
 </body>
 </html>

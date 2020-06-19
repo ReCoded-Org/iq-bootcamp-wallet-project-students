@@ -2,9 +2,6 @@
     box-sizing: border-box;
     font-family: 'Lato', sans-serif;
 }
-.hide-drop{
-    display: none;
-}
 .image-ghost{
     width: 200px;
     height: 200px;
@@ -20,14 +17,4 @@
     display: none;
 }
 
-
- /* ahmeds section
-
- end of ahmed section  */
-
-
- 
-  /* dunia section 
-
-end of dunia section  */
 
