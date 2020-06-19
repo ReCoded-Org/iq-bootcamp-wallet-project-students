@@ -32,4 +32,17 @@ class Wallet{
         return this.startingBalance + total;
     }
 }
+(function main(){
+    const wallets = [wallet1, wallet2];
+    
+    function storeToStorage(){
+        localStorage.clear();
+        const walletsString = JSON.stringify(wallets);
+        localStorage.setItem("wallets", walletsString);
+    }
 
+    function retrieveFromStorage(){
+        const walletsString = localStorage.getItem("wallets");
+        wallets = JSON.parse(walletsString);
+    }
+})()
