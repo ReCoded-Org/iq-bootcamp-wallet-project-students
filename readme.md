@@ -2,10 +2,10 @@
 
 This project will help you cover most of the knowledge you've learned so far in JavaScript into practice.
 
-
 You are required to create this using OOP and a css framework (eg. Bootstrap) and use only Vanilla JS
 
 ## Functionality
+
 - The app should be able to manage multiple wallets
 - A wallet has a name, starting balance, a list of Transactions, and description
 - The wallets should be saved and loaded from a storage (with thier data)
@@ -14,6 +14,7 @@ You are required to create this using OOP and a css framework (eg. Bootstrap) an
 - a user can jump between the wallets and create wallets
 
 ## Mockups
+
 Wallet View
 ![No Wallet View](https://github.com/ReCoded-Org/iq-bootcamp-wallet-project-students/blob/master/mockups/no-wallet-view.jpg?raw=true)
 
@@ -23,9 +24,10 @@ No Wallet View
 Create Wallet Form
 ![Create Wallet Form](https://github.com/ReCoded-Org/iq-bootcamp-wallet-project-students/blob/master/mockups/create-wallet-form.jpg?raw=true)
 
-
 ## Classes
+
 Every object in this app should be a class. For instance:
+
 - Wallet
 - Transaction
 - Expense
