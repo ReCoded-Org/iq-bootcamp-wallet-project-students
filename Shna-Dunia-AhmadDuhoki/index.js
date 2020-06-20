@@ -90,7 +90,8 @@ function transactionsUpdater() {
     transuctionList.innerHTML = "";
     let array = JSON.parse(localStorage.getItem("array")) || [];
     let selectedUser = JSON.parse(localStorage.getItem("selectedUser")) || array[0];
-    const transactions = selectedUser.transactions || [];
+
+    const transactions = (selectedUser && selectedUser.transactions ) ? selectedUser.transactions : [];
     transactions.forEach(element => (
         transuctionList.insertAdjacentHTML('beforeend', `<li class="list-group-item">
         <p class="float-right">${element.date}</p><h3 style="${element.type === 'income' ? 'color:green' : 'color:red'}">${element.value}</h3><p>${element.note}</p><p>${element.tags}</p>
