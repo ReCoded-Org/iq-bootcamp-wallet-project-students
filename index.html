@@ -25,15 +25,35 @@
       <a class="navbar-brand tracking-in-expand-fwd" href="#">
         Wallet App
       </a>
-      <label for="empty-wallet-sec">Choose wallet:</label>
-      <select id="empty-wallet-sec" class="custom-select w-25">
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
+      <div class="row ">
+        <button
+          type="button"
+          class="btn btn-primary col mr-3"
+          data-toggle="modal"
+          data-target="#exampleModal"
+        >
+          Create Wallet
+        </button>
+        <select id="wallet-select" class="custom-select w-auto col">
+          <option selected disabled>Choose wallet:</option>
+        </select>
+      </div>
     </nav>
     <main>
-      <section class=" ">
+        
+          </div>
+
+
+
+
+
+          </div>
+
+
+
+
+
+      <section class=" " id="empty-wallet-sec">
         <div class="container">
           <div class="row justify-content-center pt-5">
             <img
@@ -66,7 +86,7 @@
       </section>
 
       <div
-        class="modal fade rotate-in-center"
+        class="modal fade tilt-in-fwd-tr"
         id="exampleModal"
         tabindex="-1"
         role="dialog"
@@ -89,9 +109,9 @@
               </button>
             </div>
             <div class="modal-body">
-              <form>
+              <form id="walletForm">
                 <div class="form-group row">
-                  <label for="inputEmail3" class="col-sm-2 col-form-label"
+                  <label for="name-input" class="col-sm-2 col-form-label"
                     >Name</label
                   >
                   <div class="col-sm-10">
@@ -99,7 +119,8 @@
                       type="text"
                       class="form-control"
                       id="name-input"
-                      placeholder="Enter your name "
+                      placeholder="Enter Your Name "
+                      required
                     />
                   </div>
                 </div>
@@ -145,13 +166,15 @@
                     <input
                       class="form-control"
                       type="number"
-                      value="42"
-                      id="example-number-input"
+                      placeholder="1500"
+                      id="balance-input"
+                      min="1"
+                      required
                     />
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="inputEmail3" class="col-sm-2 col-form-label"
+                  <label for="descrption-input" class="col-sm-2 col-form-label"
                     >Descrption</label
                   >
 
@@ -161,7 +184,6 @@
                       id="descrption-input"
                       cols="40"
                       rows="3"
-                      style="overflow:auto;resize:none"
                     ></textarea>
                   </div>
                 </div>
@@ -175,18 +197,84 @@
               >
                 Close
               </button>
-              <button type="button" class="btn btn-primary">Create</button>
+              <button form="walletForm" type="submit" class="btn btn-primary" id="modalCreate">
+                Create
+              </button>
             </div>
           </div>
         </div>
       </div>
 
-      <section id="wallet-prev-sec"></section>
+      <section id="wallet-prev-sec" class="d-flex justify-content-center align-items-center">
+
+        <div class="container">
+          <div class="row"><h4 id="balanceChecker">Wallet Balance</h4></div>
+          <form action="#" id="transaction-form">
+            <div class="mb-3 row">
+            <div class="input-group col">
+              <input
+                type="number"
+                class="form-control"
+                aridiva-label="Amount (to the nearest dollar)"
+              />
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <div class="input-group-append">
+                <span class="input-group-text">.00</span>
+              </div>
+            </div>
+            <div class="btn-group btn-group-toggle col" data-toggle="buttons">
+              <label class="btn btn-success">
+                <input
+                  type="radio"
+                  name="options"
+                  id="option1"
+                  autocomplete="off"
+                />
+                Income
+              </label>
+              <label class="btn btn-outline-danger">
+                <input
+                  type="radio"
+                  name="options"
+                  id="option2"
+                  autocomplete="off"
+                />
+                Expense
+              </label>
+            </div>
+            </div>
+            <div class="input-group mb-3 mt-3 ">
+              <div class="form-group row w-100"">
+                <div class="col">
+                <label for="transaction-note">Transaction Note</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="transaction-note"
+                  aria-describedby="emailHelp"
+                />
+              </div>
+              <div class="col">
+                <label for="transaction-tag">Transaction tags</label>
+                <input type="text" class="form-control" id="transaction-tag" />
+              </div>
+                <button type="submit" class="btn btn-secondary mt-3 col" >
+                  Add Transaction
+                </button>
+              </div>
+              <!-- <div class="form-group"></div> -->
+            
+          </form>
+        </div>
+      </section>
     </main>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="app.js"></script>
+
+   
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -201,6 +289,8 @@
       src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
-    ></script>
+    ></script> 
+    <script src="class.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>
