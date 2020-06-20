@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-<body>
+<body id="root">
 
     <header>
         <!-- Fixed navbar -->
@@ -48,13 +48,13 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Create New Wallet</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form>
+                                <form id='walletInfo'>
                                     <div class="form-group row">
                                         <label for="name" class="col-sm-2 col-form-label">Name</label>
                                         <div class="col-sm-10">
@@ -66,14 +66,14 @@
                                         <div class="row">
                                             <legend class="col-form-label col-sm-2 pt-0">Currency</legend>
                                             <div class="col-sm-10">
-                                                <div class="form-check">
+                                                <div class="form-check col-xs-6 ">
                                                     <input class="form-check-input" type="radio" name="currency" id="US"
-                                                        value="US" checked>
+                                                        value="$" checked>
                                                     <label class="form-check-label" for="Us">
                                                         US Dollar($)
                                                     </label>
                                                 </div>
-                                                <div class="form-check">
+                                                <div class="form-check col-xs-6">
                                                     <input class="form-check-input" type="radio" name="currency"
                                                         id="IQD" value="IQD">
                                                     <label class="form-check-label" for="IQD">
@@ -96,7 +96,7 @@
                                     <div class="form-group row">
                                         <label for="description" class="col-sm-2 col-form-label">Description</label>
                                         <div class="col-sm-10">
-                                            <textarea class="form-control" id="description"></textarea>
+                                            <textarea class="form-control " id="description"></textarea>
 
                                         </div>
                                     </div>
@@ -105,7 +105,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Send message</button>
+                                <button type="button" class="btn btn-info" id="wallet-view">Creat Wallet</button>
                             </div>
                         </div>
                     </div>
@@ -124,14 +124,14 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="./script.js"></script>
+
     <script src="./jquery-3.2.1.slim.min.js.download"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../ assets / js / vendor / jquery - slim.min.js"><\/script>')</script>
     <script src="./popper.min.js.download"></script>
     <script src="./bootstrap.min.js.download"></script>
-
+    <script src="./script.js"></script>
 
 </body>
 

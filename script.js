@@ -28,22 +28,63 @@ x.on('show.bs.modal', function (event) {
 })*/
 
 
+//const wallet = document.getElementById('walletInfo');
+//const currency = document.getElementsByName('currency');
 
-class Wallet {
 
+
+function getRadioVal(name) {
+    let val;
+    // get list of radio buttons with specified name
+    let radios = document.getElementsByName(name);
+
+    // loop through list of radio buttons
+    for (let i = 0, len = radios.length; i < len; i++) {
+        if (radios[i].checked) { // radio checked?
+            val = radios[i].value; // if so, hold its value in val
+            break; // and break out of for loop
+        }
+    }
+    return val; // return value of checked radio or undefined if none checked
 }
-class Transaction {
 
-}
-class Expense {
 
-}
-class Income {
 
-}
-class Currency {
 
-}
+
+
+document.getElementById('wallet-view').addEventListener('click', () => {
+    let obj = {
+        name: document.getElementById('name').value,
+        currency: getRadioVal('currency'),
+        balance: document.getElementById('balance').value,
+        description: document.getElementById('description').value
+
+    }
+    // console.log(obj.currency);
+    //window.localStorage['obj'] = obj;
+    // window.sessionStorage.setItem("wallet" + obj.name, JSON.stringify(obj.name));
+    window.localStorage.setItem("wallet" + obj.name, JSON.stringify(obj.name));
+    //window.sessionStorage.setItem("wallet", "Hello");
+    window.localStorage.setItem(obj.name + "name", JSON.stringify(obj.name));
+    window.localStorage.setItem(obj.name + "currency", JSON.stringify(obj.currency));
+    window.localStorage.setItem(obj.name + "balance", JSON.stringify(obj.balance));
+    window.localStorage.setItem(obj.name + "description", JSON.stringify(obj.description));
+
+
+
+    /*window.sessionStorage.setItem("wallet" + obj.name, JSON.stringify(obj.name));
+    //window.sessionStorage.setItem("wallet", "Hello");
+    window.sessionStorage.setItem(obj.name + "name", JSON.stringify(obj.name));
+    window.sessionStorage.setItem(obj.name + "currency", JSON.stringify(obj.currency));
+    window.sessionStorage.setItem(obj.name + "balance", JSON.stringify(obj.balance));
+    window.sessionStorage.setItem(obj.name + "description", JSON.stringify(obj.description));
+    //localStorage.setItem('name', obj.name)*/
+    location.replace("./wallet-view.html");
+})
+
+
+
 
 
 

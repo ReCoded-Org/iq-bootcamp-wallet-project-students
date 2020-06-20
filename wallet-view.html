@@ -32,11 +32,12 @@
             <div class="row">
                 <div class="col-md-6 select-outline">
 
-                    <select class="btn btn-info mdb-select md-form md-outline colorful-select dropdown-primary">
+                    <select id="walletSelect"
+                        class="btn btn-info mdb-select md-form md-outline colorful-select dropdown-primary">
                         <option value="-1" disabled selected>Choose a wallet to Display</option>
-                        <option value="1">Wissam</option>
+                        <!--<option value="1">Wissam</option>
                         <option value="2">Osama</option>
-                        <option value="3">Mohammed</option>
+                        <option value="3">Mohammed</option>-->
                     </select>
                 </div>
             </div>
@@ -44,10 +45,85 @@
     </header>
 
     <!-- Begin page content -->
-    <main role="main" class='d-flex flex-column container justify-content-center align-items-center'>
-        <h1 class="walletBalance"></h1>
+    <main role="main" class='d-flex flex-column container'>
+        <div>
+            <h1 id='headerInfo' class="walletBalance m-5">-------</h1>
+        </div>
+        <form id="transactionForm" class="needs-validation container" novalidate>
+            <div class="form-row">
+                <div class="col-md-6 mb-3 ml-2">
+                    <label for="makeTransaction">Make a transaction</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="makeTransaction" placeholder="0"
+                            aria-describedby="transactionAmount" required>
+                        <div class="invalid-tooltip">
+                            Please choose a unique and valid username.
+                        </div>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="transactionAmount">$</span>
+                        </div>
+
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="transactionBalance">Balance</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                        <div class="btn-group m-4 " role="group" aria-label="First group">
+                            <button type="button" id="income"
+                                class="btn btn-outline-success btn-block mt-2 pl-5 pr-5">Income</button>
+                            <button type="button" id="expense"
+                                class="btn btn-outline-danger mt-2 pl-5 pr-5 btn-block">Expense</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class=" form-row container">
+                    <div class="col-md-4 mb-5">
+                        <label for="transactionNote">Transaction Notes:</label>
+                        <input type="text" class="form-control" id="transactionNote" placeholder="Lunch" required>
+                        <div class="invalid-tooltip">
+                            Please provide a Transaction note.
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-5">
+                        <label for="transactionTags">Transaction Tags:</label>
+                        <input type="text" class="form-control" id="transactionTags" placeholder="Food, Lifestyle"
+                            required>
+                        <div class="invalid-tooltip">
+                            Please provide a Transaction Tag.
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-5 mt-4 pt-2">
+                        <button id="addTransaction" class="btn btn-secondary btn-block">Add Transaction</button>
+                    </div>
+                </div>
+            </div>
+        </form>
 
 
+        <ul id="transactionList" class="list-group">
+            <li class="list-group-item">List of Transactions</li>
+            <!--<li class="list-group-item list-group-item-success btn-outline-success">This is a success list group item
+            </li>
+            <li class="list-group-item list-group-item-danger btn-outline-danger">This is a danger list group item</li>
+        -->
+        </ul>
+
+
+
+        <!-- <ul class="list-group list-group-flush">
+            <li class="list-group-item">Cras justo odio</li>
+            <li class="list-group-item">Dapibus ac facilisis in</li>
+            <li class="list-group-item">Morbi leo risus</li>
+            <li class="list-group-item">Porta ac consectetur ac</li>
+            <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+        -->
     </main>
 
     <footer class="footer">
@@ -62,7 +138,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="./script.js"></script>
+    <script src="./script2.js"></script>
     <script src="./jquery-3.2.1.slim.min.js.download"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
