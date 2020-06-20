@@ -24,30 +24,30 @@ let expenseBtn = document.getElementById('expense-btn');
 
 
 // apearing the modal
-create.addEventListener('click', function(){
+create.addEventListener('click', function () {
     $('#myModal').modal('show')
 })
-create2.addEventListener('click', function(){
+create2.addEventListener('click', function () {
     $('#myModal').modal('show')
 })
 
-function addtoLocal(){
+function addtoLocal() {
     let array = JSON.parse(localStorage.getItem("array")) || [];
     const currency = $("input[name=optradio]:checked").val() || '$'
     let obj = {
-        Name:getName.value,
-        Currency:currency,
-        Balance:getBalance.value,
-        Description:getDescription.value
+        Name: getName.value,
+        Currency: currency,
+        Balance: getBalance.value,
+        Description: getDescription.value
     }
-   array.push(obj);
-   localStorage.setItem("array", JSON.stringify(array));
-   modalForm.reset();
-   $('#myModal').modal('hide')
-   viewUpdater();
+    array.push(obj);
+    localStorage.setItem("array", JSON.stringify(array));
+    modalForm.reset();
+    $('#myModal').modal('hide')
+    viewUpdater();
 }
 
-function selectedUser(index){
+function selectedUser(index) {
     let array = JSON.parse(localStorage.getItem("array")) || [];
     let selectedUser = array[index];
     selectedUser.index = index;
@@ -58,10 +58,10 @@ function selectedUser(index){
     transactionsUpdater();
 }
 
-function viewUpdater(){
+function viewUpdater() {
     let array = JSON.parse(localStorage.getItem("array")) || [];
 
-    if(array.length > 0){
+    if (array.length > 0) {
         noWallet.classList.add('hiding');
         dropDown.classList.remove('hiding');
         walletView.classList.remove('hiding');
@@ -69,15 +69,15 @@ function viewUpdater(){
         let selectedUser = JSON.parse(localStorage.getItem("selectedUser")) || array[0];
         dropDownList.innerHTML = " "
         array.forEach((element, index) => {
-        dropDownList.insertAdjacentHTML('beforeend',`
+            dropDownList.insertAdjacentHTML('beforeend', `
         <a class="dropdown-item" href="#" onclick="selectedUser(${index})">${element.Name}
-        </a>`)        
+        </a>`)
         });
 
         dropDown.innerText = `${selectedUser.Name}s wallet`
         walletBalance.innerText = ` Wallet Balance : ${selectedUser.Currency} ${selectedUser.Balance}`
         moneyAmount.innerText = `${selectedUser.Balance}`;
-        moneyType.innerText = `${selectedUser.Currency}` 
+        moneyType.innerText = `${selectedUser.Currency}`
     } else {
         noWallet.classList.remove('hiding')
         dropDown.classList.add('hiding');
@@ -86,106 +86,106 @@ function viewUpdater(){
 }
 
 let transactionType = 'income';
-function transactionsUpdater(){
+function transactionsUpdater() {
     transuctionList.innerHTML = "";
     let array = JSON.parse(localStorage.getItem("array")) || [];
     let selectedUser = JSON.parse(localStorage.getItem("selectedUser")) || array[0];
-    const transactions  = selectedUser.transactions || [];
-    transactions.forEach(element=>(
-        transuctionList.insertAdjacentHTML('beforeend',`<li class="list-group-item">
-        <p class="float-right">${element.date}</p><h3 style="${element.type === 'income' ? 'color:green': 'color:red'}">${element.value}</h3><p>${element.note}</p><p>${element.tags}</p>
+    const transactions = selectedUser.transactions || [];
+    transactions.forEach(element => (
+        transuctionList.insertAdjacentHTML('beforeend', `<li class="list-group-item">
+        <p class="float-right">${element.date}</p><h3 style="${element.type === 'income' ? 'color:green' : 'color:red'}">${element.value}</h3><p>${element.note}</p><p>${element.tags}</p>
         </li>`)
     ))
 }
-function displayLi(e){
+function displayLi(e) {
     e.preventDefault();
-    if(transactionType === "income"){
+    if (transactionType === "income") {
         Income();
     }
-    else{
+    else {
         Expense();
     }
     transuctionForm.reset();
     transactionsUpdater();
 }
 
-function transactionTypeSetter(type = 'income'){
+function transactionTypeSetter(type = 'income') {
     transactionType = type;
 }
 
-function Income(){
+function Income() {
     let array = JSON.parse(localStorage.getItem("array")) || [];
     let selectedUser = JSON.parse(localStorage.getItem("selectedUser")) || array[0];
-   let income = parseInt(transuction.value,10) + parseInt(selectedUser.Balance,10);
-   selectedUser.Balance = income;
+    let income = parseInt(transuction.value, 10) + parseInt(selectedUser.Balance, 10);
+    selectedUser.Balance = income;
 
-    let Tags =transuctionTag.value;
+    let Tags = transuctionTag.value;
     let splitedTag = Tags.split(',')
-    let badges = splitedTag.reduce((acc, tag) => acc + `<span class="badge badge-dark">${tag}</span>    ` , ' ');
+    let badges = splitedTag.reduce((acc, tag) => acc + `<span class="badge badge-dark">${tag}</span>    `, ' ');
     let date = new Date();
     let options = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', };
-    let dateString = date.toLocaleDateString('en-US', options).replace(',', '').replace(',', '') + ' | ' +  date.toLocaleTimeString('en-US',)
-    
+    let dateString = date.toLocaleDateString('en-US', options).replace(',', '').replace(',', '') + ' | ' + date.toLocaleTimeString('en-US',)
+
     selectedUser.transactions = selectedUser.transactions || [];
     selectedUser.index = selectedUser.index || 0;
-   selectedUser.transactions.push({
-       type: 'income',
-       value: transuction.value,
-       tags: badges,
-       date: dateString,
-       note:transuctionNote.value
-   });
+    selectedUser.transactions.push({
+        type: 'income',
+        value: transuction.value,
+        tags: badges,
+        date: dateString,
+        note: transuctionNote.value
+    });
 
-   localStorage.setItem('selectedUser',JSON.stringify(selectedUser));
-  
-   array[selectedUser.index].Balance =  selectedUser.Balance;
-   array[selectedUser.index].transactions =  selectedUser.transactions;
+    localStorage.setItem('selectedUser', JSON.stringify(selectedUser));
 
-   localStorage.setItem('array', JSON.stringify(array))
-   balanceUpdater()
+    array[selectedUser.index].Balance = selectedUser.Balance;
+    array[selectedUser.index].transactions = selectedUser.transactions;
+
+    localStorage.setItem('array', JSON.stringify(array))
+    balanceUpdater()
 }
-function Expense(){
+function Expense() {
     let array = JSON.parse(localStorage.getItem("array")) || [];
-    let selectedUser = JSON.parse(localStorage.getItem("selectedUser"))  || array[0];
-    
-    let expense = parseInt(selectedUser.Balance,10) - parseInt(transuction.value,10);
+    let selectedUser = JSON.parse(localStorage.getItem("selectedUser")) || array[0];
+
+    let expense = parseInt(selectedUser.Balance, 10) - parseInt(transuction.value, 10);
     selectedUser.Balance = expense;
 
-    let Tags =transuctionTag.value;
+    let Tags = transuctionTag.value;
     let splitedTag = Tags.split(',')
-    let badges = splitedTag.reduce((acc, tag) => acc + `<span class="badge badge-dark">${tag}</span>    ` , ' ');
+    let badges = splitedTag.reduce((acc, tag) => acc + `<span class="badge badge-dark">${tag}</span>    `, ' ');
     let date = new Date();
     let options = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', };
-    let dateString = date.toLocaleDateString('en-US', options).replace(',', '').replace(',', '') + ' | ' +  date.toLocaleTimeString('en-US',)
+    let dateString = date.toLocaleDateString('en-US', options).replace(',', '').replace(',', '') + ' | ' + date.toLocaleTimeString('en-US',)
 
     selectedUser.transactions = selectedUser.transactions || [];
     selectedUser.index = selectedUser.index || 0;
-   selectedUser.transactions.push({
-       type: 'expense',
-       value: transuction.value,
-       tags: badges,
-       date: dateString,
-      note:transuctionNote.value
-   });
-    
-    localStorage.setItem('selectedUser',JSON.stringify(selectedUser));
-    
-    array[selectedUser.index].Balance =  selectedUser.Balance;
-    array[selectedUser.index].transactions =  selectedUser.transactions;
+    selectedUser.transactions.push({
+        type: 'expense',
+        value: transuction.value,
+        tags: badges,
+        date: dateString,
+        note: transuctionNote.value
+    });
+
+    localStorage.setItem('selectedUser', JSON.stringify(selectedUser));
+
+    array[selectedUser.index].Balance = selectedUser.Balance;
+    array[selectedUser.index].transactions = selectedUser.transactions;
 
     localStorage.setItem('array', JSON.stringify(array));
     balanceUpdater()
 }
-function balanceUpdater(){
+function balanceUpdater() {
     let selectedUser = JSON.parse(localStorage.getItem("selectedUser")) || array[0];
     walletBalance.innerText = `Wallet Balance : ${selectedUser.Currency} ${selectedUser.Balance}`
     moneyAmount.innerText = `${selectedUser.Balance}`;
-    moneyType.innerText = `${selectedUser.Currency}` ;
+    moneyType.innerText = `${selectedUser.Currency}`;
 }
 
-createbtn.addEventListener('click',addtoLocal);
-window.onload = function(){
+createbtn.addEventListener('click', addtoLocal);
+window.onload = function () {
     viewUpdater();
     transactionsUpdater();
 }
-transuctionForm.addEventListener('submit',displayLi)
+transuctionForm.addEventListener('submit', displayLi)
