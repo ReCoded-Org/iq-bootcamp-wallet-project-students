@@ -204,7 +204,7 @@ function reloadLocalStorage() {
 
     if (selectedWallet != null) {
         noWalletHide.style.display = "none"
-
+         walletHide.style.display = "block"
         currentMoney.innerText = selectedWallet.currency.symbol +" "+ selectedWallet.balance;
         currentSymbol.innerText = selectedWallet.currency.symbol;
         currentNumber.innerText = selectedWallet.balance;
