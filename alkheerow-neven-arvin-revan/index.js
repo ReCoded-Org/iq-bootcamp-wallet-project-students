@@ -82,8 +82,6 @@ const walletForm = document.getElementById("wallet-form");
 const nameInput = document.getElementById("name");
 const balanceInput = document.getElementById("balance");
 const descriptionInput = document.getElementById("description");
-const dollarCurrency = document.getElementById('dollar-currency')
-const dinarCurrency = document.getElementById('dinar-currency')
 
 const transactionForm = document.getElementById("transaction-form");
 const balanceNumberOutput = document.getElementById("balance-number");
