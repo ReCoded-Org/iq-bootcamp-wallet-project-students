@@ -41,7 +41,7 @@ class Wallet {
         let wallets = Wallet.getWalletsLocalStorage();
         wallets = wallets == null ? [] : wallets;
         this.id = wallets.length;
-        wallets.push({ walletKey: this._walletKey(), name: this.name });
+        wallets.push({ walletKey: this.walletKey(), name: this.name });
         Wallet.setWalletsLocalStorage(wallets);
         this._updateLocalStorage();
         console.log();
@@ -66,7 +66,7 @@ class Wallet {
 
 
 
-    _walletKey() {
+    walletKey() {
         return `Wallet_${this.id}`;
     }
 
@@ -106,7 +106,7 @@ class Wallet {
 
 
     _updateLocalStorage() {
-        localStorage.setItem(this._walletKey(), JSON.stringify(this));
+        localStorage.setItem(this.walletKey(), JSON.stringify(this));
     }
 
 
@@ -213,7 +213,7 @@ function reloadLocalStorage() {
     
         dropdownMenu.innerHTML = '';
         wallets.forEach(wallet => {
-            if (wallet.walletKey != selectedWallet._walletKey())
+            if (wallet.walletKey != selectedWallet.walletKey())
                 dropdownMenu.insertAdjacentHTML("beforeend", `<a class="dropdown-item" href="#" onclick="setSelectedWalletKeyLocalStorage('${wallet.walletKey}')">${wallet.name}</a>`);
         });
         dropdownMenu.insertAdjacentHTML("beforeend", `<div class="dropdown-divider"></div>`)
