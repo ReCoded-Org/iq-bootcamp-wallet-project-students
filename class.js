@@ -7,11 +7,13 @@ class Wallet {
   }
 }
 class Transaction {
-  constructor(amount, type, note, tag, date) {
+  constructor(amount, type, note, tag, date, time, balance) {
     this.amount = amount;
     this.type = type;
     this.note = note;
     this.tag = tag;
     this.date = date;
+    this.time = time;
+    this.balance = balance;
   }
 }
