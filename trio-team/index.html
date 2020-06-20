@@ -17,104 +17,121 @@
     </nav>
 </header>
 <main>
-    <section class="empty">
-        <figure class="d-flex justify-content-center pt-5">
-            <img src="./img/gitscrum-ooops.svg"  class="pt-5" style=" width:500px; text-align: center " alt="Ooops For Money">
-            
-        </figure>
-        <div class="container">
-            <article class=" d-flex justify-content-center align-items-center flex-column  ">
-                <h3 class="">Ooops!</h3>
-                <p  class="">You have no wallets. start by creating one</p>             
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                        Create wallet
-                    </button>
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Create a new wallet</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="walletForm">
-                                    <div class="form-group">
-                                      <label for="name">Name</label>
-                                      <input type="text" class="form-control" id="name">
-                                    </div>
-                                    <div class="form-group" id="currency">
-                                        <label for="">Currency</label>
-                                            <input type="radio" name="currency" id="usd" value="USD">
-                                            <label for="usd">USD</label>
-                                            <input type="radio" name="currency" id="iqd" value="IQD">
-                                            <label for="iqd">IQD</label>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="balance">Balance</label>
-                                        <input type="text" class="form-control" id="balance">  
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="description">Description</label>
-                                        <input type="text" class="form-control" id="description">
-                                    </div>
-                                    <div class="">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Create Wallet</button>
-                                    </div>
-                                </form>
-                            </div>
-                            
-                        </div>
-                        </div>
-                    </div>
-            </article>
+    <section>
+        <div class="container empty">
+            <figure class="d-flex justify-content-center pt-5">
+                <img src="./kisspng-cartoon-animation-wallet-flat-wallet-5a69d5acb31322.6013263015168854207335.png"  class="pt-5" style=" width:500px; text-align: center " alt="Ooops For Money">
+                
+            </figure>
+            <div class="container">
+                <article class=" d-flex justify-content-center align-items-center flex-column  ">
+                    <h3 class="">Ooops!</h3>
+                    <p  class="">You have no wallets. start by creating one</p>             
+                       
+                        <!-- Modal -->
+                        
+                </article>
+            </div>
         </div>
-    </section>
-    <!--SARA SECTION -->
-    <section class="wallet" >
-        <div class="middile" >
-            <h6>Make a transaction</h6>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend itemPosition" >
-                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                    <span class="input-group-text">$</span>
-                </div>
-
-                <div class="input-group-append">
-                    <span class="input-group-text">.00</span>
-                    <div class="space">
-                        <div class="btn-group btn-group-toggle green" data-toggle="buttons">
-                            <label class="btn btn-secondary ">
-                            <input type="radio" name="options" id="option1" autocomplete="off" checked> Income
-                            </label>
-                            <label class="btn btn-secondary">
-                            <input type="radio" name="options" id="option2" autocomplete="off"> Expence
-                            </label>
-                        </div>
+        <div class="container d-flex align-items-center">
+            <button type="button" id="toggle-btn" class="btn btn-primary center-btn" data-toggle="modal" data-target="#exampleModal">
+                Create wallet
+            </button>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create a new wallet</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                     </div>
+                    <div class="modal-body">
+                        <form id="walletForm">
+                            <div class="form-group">
+                              <label for="name">Name</label>
+                              <input type="text" class="form-control" id="name">
+                            </div>
+                            <div class="form-group" id="currency">
+                                <label for="">Currency</label>
+                                    <input type="radio" name="currency" id="usd" value="USD">
+                                    <label for="usd">USD</label>
+                                    <input type="radio" name="currency" id="iqd" value="IQD">
+                                    <label for="iqd">IQD</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="balance">Balance</label>
+                                <input type="text" class="form-control" id="balance">  
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <input type="text" class="form-control" id="description">
+                            </div>
+                            <div class="">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Create Wallet</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                </div>
                 </div>
             </div>
+        </div>
+    </section>
+    
+    <!--SARA SECTION -->
+    <section class="wallet" >
+        <div class="container" >
+            <h1 id="total-balance"></h1>
+            <h6>Make a transaction</h6>
+           
         
-            <form>
+            <form id="transaction-form" class="row">
                 <div class="form-row">
-                    
-                <div class="col ">
+                    <div class="input-group mb-3 row d-flex justify-content-between">
+                        <div class="input-group-prepend col col-md-6 col-sm-12" >
+                            <input type="text" id="amount" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-text" id="currency-symbol"></span>
+                            <span class="input-group-text" id="balance-span"></span>
+                        </div>
+                        <div class="input-group-append col col-md-4 col-sm-12">
+                            <div class="space">
+                                <div id="transaction-type" class="btn-group btn-group-toggle green " data-toggle="buttons">
+                                    <label class="btn btn-success ">
+                                    <input type="radio" name="options" id="income" value="income"> Income
+                                    </label>
+                                    <label class="btn btn-danger">
+                                    <input type="radio" name="options" id="expense" value="expense"> Expence
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-md-6 col-sm-12 ">
                     <label>Transaction Notes</label>
-                    <input type="text" class="form-control coll" placeholder="Lunch">
+                    <input type="text" id="notes" class="form-control coll" placeholder="Lunch">
                 </div>
-                <div class="col">
+                <div class="col col-md-6 col-sm-12">
                     <label>Transaction Tags</label>
-                    <input type="text" class="form-control coll" placeholder="Food, Lifestyle">
+                    <input type="text" id="tags" class="form-control coll" placeholder="Food, Lifestyle">
                 </div>
                 <div class="col">
-                    <button  class="form-control coll color">Add Transaction</button>
+                    <button type="submit"  class="form-control coll color">Add Transaction</button>
                 </div>
             </form>
-            <ul class="transaction"></ul>
+            <div class="container">
+                <ul id="transactions-list"></ul>
+            </div>
         </div>
+        <div class="container">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Create wallet
+            </button>
+        </div>
+      
+  
     </section>
 </main>
 
