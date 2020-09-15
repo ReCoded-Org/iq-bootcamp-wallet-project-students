@@ -1,4 +1,5 @@
 # The Wallet App
+A html and css project 
 
 This project will help you cover most of the knowledge you've learned so far in JavaScript into practice.
 
