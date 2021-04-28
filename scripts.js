@@ -14,4 +14,12 @@ class Wallet {
     this.description = description;
   }
 }
-class Transaction {}
+
+class Transaction {
+  constructor(value, type, note, tags) {
+    this.value = value;
+    this.type = type;
+    this.note = note;
+    this.tags = tags;
+  }
+}
