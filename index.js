@@ -1,16 +1,19 @@
 class Wallet {
-  constructor(name, description) {
+  constructor(name, description = '', balance = 0) {
     this.name = name;
     this.description = description;
-    this.balance = 0;
+    this.balance = balance;
     this.transactions = new Transactions();
   }
 
-  // makeTransaction()
+  makeTransaction(amount, note = '', tag = '') {
+    this.balance += amount;
+    this.transactions.add(new Transaction(amount, note, tag));
+  }
 }
 
 class Transaction {
-  constructor(amount, note = '', tag) {
+  constructor(amount, note, tag) {
     this.amount = amount;
     this.note = note;
     this.tag = tag;
@@ -35,10 +38,8 @@ function popUpWallet(e) {
   const pop = document.createElement('div');
   pop.classList.add('pop-up');
 
-  //make header
   const header = createPopUpHeader();
 
-  // make form
   const form = createPopUpForm(
     [{
         name: 'US Dollars',
@@ -50,7 +51,7 @@ function popUpWallet(e) {
       },
     ]
   );
-  // create footer
+
   const footer = createPopUpFooter();
 
   pop.append(header, form, footer);
