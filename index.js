@@ -10,6 +10,10 @@ class Wallet {
     this.balance += amount;
     this.transactions.add(new Transaction(amount, note, tag));
   }
+
+  get history() {
+    return this.transactions.list;
+  }
 }
 
 class Transaction {
