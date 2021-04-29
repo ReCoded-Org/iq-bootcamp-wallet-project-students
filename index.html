@@ -8,10 +8,43 @@
   <title>Document</title>
 </head>
 <body>
-  <img src="./ghost.jpg" alt="">
-  <div class="error">ooops!</div>
-  <div>You have no wallet! Start by making one!</div>
-  <button id="create-wallet">Create Wallet</button>
+  <header id="main-header">
+    <h3>WalletApp</h3>
+  </header>
+  <div id="no-wallet-view">
+    <img src="./ghost.jpg" alt="">
+    <h3 class="error">Ooops!</h3>
+    <p>You have no wallets. Start by making one</p>
+    <button id="create-wallet-btn" class="primary">Create Wallet</button>
+  </div>
+
+  <div id="pop-up">
+    <header class="pop-header">
+      <span>Create new wallet</span>
+      <span>&times;</span>
+    </header>
+​
+    <form id="create-wallet-form">
+      <label for="name" class="txt-label">Name</label>
+      <input type="text" name="name" id="name" placeholder="John Doe">
+
+      <br>
+
+      <label for="currency-options" class="txt-label">Currency</label>
+      <span id="currency-options" style="display: inline-block;"></span>
+
+      <br>
+      <label for="balance" class="txt-label">Balance</label>
+      <input type="number" name="balance" id="balance"  placeholder="0" min="0">
+      <br>
+      <label for="description" class="txt-label">Description</label>
+      <input type="text" name="description" id="description" placeholder="eg. my bank account">
+    </form>
+    <footer>
+      <button id="close-Wallet-Btn">Close</button>
+      <button id="submit-wallet">Creat Wallet</button>
+    </footer>
+  </div>
   <script src="./index.js"></script>
 </body>
 </html>

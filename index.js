@@ -35,16 +35,11 @@ class Transactions {
   }
 }
 
-const createWallet = document.querySelector('#create-wallet');
+const createWallet = document.querySelector('#create-wallet-btn');
 createWallet.addEventListener('click', popUpWallet);
 
 function popUpWallet(e) {
-  const pop = document.createElement('div');
-  pop.classList.add('pop-up');
-
-  const header = createPopUpHeader();
-
-  const form = createPopUpForm(
+  addCurrencyOptions(
     [{
         name: 'US Dollars',
         symbol: '$',
@@ -55,47 +50,15 @@ function popUpWallet(e) {
       },
     ]
   );
-
-  const footer = createPopUpFooter();
-
-  pop.append(header, form, footer);
-  document.body.append(pop);
 }
 
-function createPopUpHeader() {
-  const header = document.createElement('header');
-  header.classList.add('pop-header');
+function addCurrencyOptions(currencies) {
 
-  const title = document.createElement('span');
-  title.innerText = 'Create new wallet';
-
-  const closeBtnHdr = document.createElement('span');
-  closeBtnHdr.innerText = 'x';
-
-  header.append(title, closeBtnHdr);
-  return header;
-}
-
-function createPopUpForm(currencies) {
-  const form = document.createElement('form');
-  form.id = 'create-wallet-form'
-
-  const name = document.createElement('input');
-  name.type = 'text';
-  name.name = 'name';
-  name.id = 'name';
-  name.placeholder = 'John Doe';
-
-  const nameLabel = document.createElement('label');
-  nameLabel.htmlFor = name.id;
-  nameLabel.innerText = 'Name';
-
-  const currencyOptions = document.createElement('span');
-  currencyOptions.id = 'currency-options';
-
-  const currencyLabel = document.createElement('label');
-  currencyLabel.htmlFor = currencyOptions.id;
-  currencyLabel.innerText = 'Currency';
+  const currencyOptions = document.querySelector('#currency-options');
+  if (!currencyOptions) {
+    console.error('could not find node with id currency-options');
+    return;
+  }
 
   currencies.forEach(currency => {
     const currencyOption = document.createElement('input');
@@ -110,44 +73,4 @@ function createPopUpForm(currencies) {
 
     currencyOptions.append(currencyOption, currencyLabel);
   });
-
-  const balance = document.createElement('input');
-  balance.type = 'number';
-  balance.placeholder = '0';
-  balance.min = 0;
-  balance.name = 'balance';
-  balance.id = 'balance';
-
-  const balanceLabel = document.createElement('label');
-  balanceLabel.htmlFor = 'balance';
-  balanceLabel.innerText = 'Balance';
-
-  const description = document.createElement('input');
-  description.type = 'text';
-  description.name = 'description';
-  description.id = 'description';
-  description.placeholder = 'eg. my bank account';
-
-  const descLabel = document.createElement('label');
-  descLabel.htmlFor = 'description';
-  descLabel.innerText = 'Description';
-
-  form.append(nameLabel, name, currencyLabel, currencyOptions, balanceLabel, balance, descLabel, description);
-  return form;
-}
-
-function createPopUpFooter() {
-  const footer = document.createElement('footer');
-
-  const closeBtnFtr = document.createElement('button');
-  closeBtnFtr.innerText = 'Close';
-  closeBtnFtr.style.backgroundColor = 'gray';
-
-  const createWalletFtr = document.createElement('input');
-  createWalletFtr.type = 'submit';
-  createWalletFtr.form = 'create-wallet-form';
-  createWalletFtr.value = 'Create Wallet';
-
-  footer.append(closeBtnFtr, createWalletFtr);
-  return footer;
 }
