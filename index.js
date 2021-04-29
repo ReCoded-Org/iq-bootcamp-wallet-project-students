@@ -22,6 +22,10 @@ class Transactions {
   constructor() {
     this.list = [];
   }
+
+  add(transaction) {
+    this.list.push(transaction);
+  }
 }
 
 const createWallet = document.querySelector('#create-wallet');
