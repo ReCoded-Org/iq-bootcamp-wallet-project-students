@@ -10,11 +10,11 @@ class Wallet {
 }
 
 class Transaction {
-  constructor(amount, note) {
+  constructor(amount, note = '', tag) {
     this.amount = amount;
     this.note = note;
-    this.tag = '';
-    this.date = Date.now();
+    this.tag = tag;
+    this.date = Date.now(); // how to format: https://stackoverflow.com/a/30158598
   }
 }
 
@@ -32,8 +32,30 @@ function popUpWallet(e) {
   pop.classList.add('pop-up');
 
   //make header
-  const hdr = document.createElement('header');
-  pop.classList.add('pop-header');
+  const header = createPopUpHeader();
+
+  // make form
+  const form = createPopUpForm(
+    [{
+        name: 'US Dollars',
+        symbol: '$',
+      },
+      {
+        name: 'Iraqi Dinars',
+        symbol: 'IQD',
+      },
+    ]
+  );
+  // create footer
+  const footer = createPopUpFooter();
+
+  pop.append(header, form, footer);
+  document.body.append(pop);
+}
+
+function createPopUpHeader() {
+  const header = document.createElement('header');
+  header.classList.add('pop-header');
 
   const title = document.createElement('span');
   title.innerText = 'Create new wallet';
@@ -41,12 +63,13 @@ function popUpWallet(e) {
   const closeBtnHdr = document.createElement('span');
   closeBtnHdr.innerText = 'x';
 
-  hdr.append(title, closeBtnHdr);
+  header.append(title, closeBtnHdr);
+  return header;
+}
 
-  // make form
+function createPopUpForm(currencies) {
   const form = document.createElement('form');
   form.id = 'create-wallet-form'
-  // give class
 
   const name = document.createElement('input');
   name.type = 'text';
@@ -55,34 +78,29 @@ function popUpWallet(e) {
   name.placeholder = 'John Doe';
 
   const nameLabel = document.createElement('label');
-  nameLabel.htmlFor = 'name';
+  nameLabel.htmlFor = name.id;
   nameLabel.innerText = 'Name';
 
-  const usCurr = document.createElement('input');
-  usCurr.type = 'radio';
-  usCurr.name = 'currency';
-  usCurr.id = 'usCurr';
-
-  const usLabel = document.createElement('label');
-  usLabel.htmlFor = 'usCurr';
-  usLabel.innerText = 'US Dollars ($)';
-
-  const iqCurr = document.createElement('input');
-  iqCurr.type = 'radio';
-  iqCurr.name = 'currency';
-  iqCurr.id = 'iqCurr';
-
-  const iqLabel = document.createElement('label');
-  iqLabel.htmlFor = 'iqCurr';
-  iqLabel.innerText = 'Iraqi Dinars (IQD)';
-
-  const currency = document.createElement('span');
-  currency.id = 'currency';
-  currency.append(usCurr, usLabel, iqCurr, iqLabel);
+  const currencyOptions = document.createElement('span');
+  currencyOptions.id = 'currency-options';
 
   const currencyLabel = document.createElement('label');
-  currencyLabel.htmlFor = 'currency';
+  currencyLabel.htmlFor = currencyOptions.id;
   currencyLabel.innerText = 'Currency';
+
+  currencies.forEach(currency => {
+    const currencyOption = document.createElement('input');
+    currencyOption.type = 'radio';
+    currencyOption.name = 'currency';
+    currencyOption.id = currency.name.toLowerCase()
+      .replaceAll(' ', '-');
+
+    const currencyLabel = document.createElement('label');
+    currencyLabel.htmlFor = currencyOption.id;
+    currencyLabel.innerText = `${currency.name} (${currency.symbol})`;
+
+    currencyOptions.append(currencyOption, currencyLabel);
+  });
 
   const balance = document.createElement('input');
   balance.type = 'number';
@@ -105,10 +123,11 @@ function popUpWallet(e) {
   descLabel.htmlFor = 'description';
   descLabel.innerText = 'Description';
 
-  form.append(nameLabel, name, currencyLabel, currency, balanceLabel, balance, descLabel, description);
+  form.append(nameLabel, name, currencyLabel, currencyOptions, balanceLabel, balance, descLabel, description);
+  return form;
+}
 
-  // create footer
-
+function createPopUpFooter() {
   const footer = document.createElement('footer');
 
   const closeBtnFtr = document.createElement('button');
@@ -121,7 +140,5 @@ function popUpWallet(e) {
   createWalletFtr.value = 'Create Wallet';
 
   footer.append(closeBtnFtr, createWalletFtr);
-
-  pop.append(hdr, form, footer);
-  document.body.append(pop);
+  return footer;
 }
