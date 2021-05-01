@@ -1,0 +1,156 @@
+html,
+body {
+    font-family: Arial;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #353a40;
+    padding: 10px 10px 10px 10px;
+    height: 40px;
+}
+
+nav>h1 {
+    color: white;
+}
+
+#accountNames {
+    width: 200px;
+    height: 30px;
+}
+
+#mainPage {
+    text-align: center;
+}
+
+#mainPage>img {
+    width: 300px;
+}
+
+/* Beginning of Modal */
+#mainCreateButton {
+    color: white;
+    background-color: #19a1b6;
+    width: 200px;
+    height: 50px;
+    font-size: larger;
+    border: none;
+    border-radius: 10px;
+}
+
+:root {
+    --modal-color: white;
+}
+
+#mainCreateButton:hover {
+    background: #3876ac;
+}
+
+.modal {
+    visibility: hidden;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    margin: 10% auto;
+    width: 500px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+    animation-name: modalopen;
+    animation-duration: var(--modal-duration);
+}
+
+.modal-header h2,
+.modal-footer h3 {
+    margin: 0;
+}
+
+.modal-header {
+    background: var(--modal-color);
+    padding: 15px;
+    color: black;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: grey solid 1px;
+}
+
+.modal-body {
+    padding: 10px 20px;
+    background: #fff;
+}
+
+.modal-footer {
+    background: var(--modal-color);
+    padding: 10px;
+    color: black;
+    text-align: center;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top: grey solid 1px;
+}
+
+.close {
+    float: right;
+    font-size: 30px;
+    color: black;
+}
+
+.close:hover,
+.close:focus {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* End of Modal */
+td {
+    height: 20px;
+
+}
+
+td:first-child {
+    width: 20%;
+    font-size: large;
+}
+
+.modalInput {
+    width: 60%;
+    height: 100%;
+    margin: 10px 0px 10px 0px;
+}
+
+#walletPage {
+    width: 75%;
+    text-align: center;
+    margin: auto;
+}
+
+#transactionSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 50%;
+    margin: auto;
+}
+
+#transactionList {
+    width: 40%;
+    margin: auto;
+}
+
+.listItem {
+    display: flex;
+    justify-content: space-between;
+}
+
+.hidden {
+    display: none;
+}
