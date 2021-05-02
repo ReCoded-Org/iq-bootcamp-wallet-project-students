@@ -1,0 +1,229 @@
+html,
+body {
+    font-family: Arial;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #353a40;
+    padding: 10px 10px 10px 10px;
+    height: 40px;
+}
+
+nav>h1 {
+    color: white;
+}
+
+#accountNames {
+    width: 200px;
+    height: 30px;
+    background-color: #19a1b6;
+    color: white;
+    border: none;
+    display: none;
+}
+
+#mainPage {
+    text-align: center;
+}
+
+#mainPage>img {
+    width: 300px;
+}
+
+/* Beginning of Modal */
+#mainCreateButton {
+    color: white;
+    background-color: #19a1b6;
+    width: 200px;
+    height: 50px;
+    font-size: larger;
+    border: none;
+    border-radius: 10px;
+}
+
+:root {
+    --modal-color: white;
+}
+
+#mainCreateButton:hover {
+    background: #3876ac;
+}
+
+.modal {
+    visibility: hidden;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    margin: 10% auto;
+    width: 500px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+    animation-name: modalopen;
+    animation-duration: var(--modal-duration);
+}
+
+.modal-header h2,
+.modal-footer h3 {
+    margin: 0;
+}
+
+.modal-header {
+    background: var(--modal-color);
+    padding: 15px;
+    color: black;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: grey solid 1px;
+}
+
+.modal-body {
+    padding: 10px 20px;
+    background: #fff;
+}
+
+.modal-footer {
+    background: var(--modal-color);
+    padding: 10px;
+    color: black;
+    text-align: center;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top: grey solid 1px;
+}
+
+.close {
+    float: right;
+    font-size: 30px;
+    color: black;
+}
+
+.close:hover,
+.close:focus {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* End of Modal */
+td {
+    height: 20px;
+
+}
+
+td:first-child {
+    width: 20%;
+    font-size: large;
+}
+
+.modalInput {
+    width: 60%;
+    height: 100%;
+    margin: 10px 0px 10px 0px;
+}
+
+#modalCloseButton {
+    background-color: #353a40;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 10%;
+    height: 40px;
+}
+
+#modalCreateButton {
+    background-color: #3876ac;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 25%;
+    height: 40px;
+}
+
+#walletPage {
+    width: 75%;
+    text-align: center;
+    margin: auto;
+}
+
+#transactionSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 75%;
+    margin: auto;
+}
+
+div>input {
+    border-radius: 5px;
+    border: black solid 1px;
+    padding: 2px;
+    width: 250px;
+}
+
+.amountSpan {
+    background-color: lightgrey;
+    border-radius: 5px;
+    border: black solid 1px;
+    padding: 2px;
+}
+
+#transactionList {
+    width: 40%;
+    margin: auto;
+}
+
+#incomeTrans {
+    display: inline-block;
+    width: 100px;
+    height: 20px;
+    padding: 20px 2px 20px 2px;
+    border: solid 2px green;
+    color: white;
+    background-color: lightgreen;
+    border-radius: 10px 0px 0px 0px;
+    background-color: ;
+}
+
+#expenseTrans {
+    display: inline-block;
+    width: 100px;
+    height: 20px;
+    padding: 20px 2px 20px 2px;
+    border: solid 2px red;
+    color: red;
+    border-radius: 0px 10px 0px 0px;
+}
+
+#addTrans {
+    width: 215px;
+    height: 50px;
+    background-color: #353a40;
+    color: white;
+    border: solid 2px grey;
+    border-top: none;
+    border-radius: 0px 0px 10px 10px;
+}
+
+.listItem {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px grey solid;
+}
+
+.tags {
+    background-color: grey;
+    color: white;
+    border: 1px solid black;
+    border-radius: 2px;
+    padding: 2px;
+}

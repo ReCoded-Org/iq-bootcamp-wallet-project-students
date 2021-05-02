@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+</head>
+
+<body>
+    <nav>
+        <h1>Wallet App</h1>
+        <select id="accountNames">
+            <option value="-1" id="selectorCreateButton">Create New Account</option>
+        </select>
+    </nav>
+    <div>
+        <div id="mainPage">
+            <img src="./Ghost.png" alt="GHOST" />
+            <h1>Ooops!</h1>
+            <p>You have no wallets. Start creating one!</p>
+            <button id="mainCreateButton" type="button">Create Wallet</button>
+        </div>
+
+        <div id="walletPage"></div>
+        <div id="transactionList"></div>
+
+        <div>
+            <div id="my-modal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close">&times;</span>
+                        <h2>Create new wallet</h2>
+                    </div>
+                    <div class="modal-body">
+                        <table style="width: 100%">
+                            <tr>
+                                <td><label for="name">Name:</label></td>
+                                <td>
+                                    <input class="modalInput" type="text" id="nameInput" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="name">Currency:</label></td>
+                                <td>
+                                    <input type="radio" id="USDollar" name="currency" value="USDollar" checked />
+                                    <label>US Dollars ($)</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <input type="radio" id="IQDinar" name="currency" value="IQDinar" />
+                                    <label>Iraqi Dinars (IQD)</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="balance">Balance:</label></td>
+                                <td>
+                                    <input class="modalInput" type="number" id="balanceInput" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="description">Description:</label></td>
+                                <td>
+                                    <input class="modalInput" type="text" id="descriptionInput" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="modalCloseButton" type="button">Close</button>
+                        <button id="modalCreateButton" type="button">
+                            Create Wallet
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./script.js"></script>
+</body>
+
+</html>
