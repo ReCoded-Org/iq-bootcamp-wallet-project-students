@@ -8,42 +8,80 @@
   <title>Document</title>
 </head>
 <body>
-  <header id="main-header">
-    <h3>WalletApp</h3>
-  </header>
+  <div id="main-header">
+    <h3>Wallet App</h3>
+    <select name="" class="user-wallet" id="select-wallet" hidden></select>
+  </div>
   <div id="no-wallet-view">
     <img src="./ghost.jpg" alt="">
     <h3 class="error">Ooops!</h3>
     <p>You have no wallets. Start by making one</p>
-    <button id="create-wallet-btn" class="primary">Create Wallet</button>
+    <button id="create-wallet-Btn">Create Wallet</button>
   </div>
 
-  <div id="pop-up">
-    <header class="pop-header">
-      <span>Create new wallet</span>
-      <span>&times;</span>
-    </header>
 ​
-    <form id="create-wallet-form">
-      <label for="name" class="txt-label">Name</label>
-      <input type="text" name="name" id="name" placeholder="John Doe">
+  <div id="pop-After">
+    <div id="pop-up">
+      <header class="pop-header">
+        <p>Create new wallet</p>
+        <span>&times;</span>
+      </header>
+​
+      <form id="create-wallet-form">
+        <label for="name" class="txt-label">Name</label>
+        <input type="text" name="name" id="name" placeholder="John Doe" required>
+        <br>
 
-      <br>
+        <label for="curr" class="txt-label">currency</label>
+        <div id="radio">
+          <input type="radio"  name="currency" value="$">
+          <label for="curr">US Dollars ($)</label>
+          <input type="radio"  name="currency" value="IQD">
+          <label for="curr">Iraqi Dinars (IQD)</label>
+        </div>
+        <br>
+        <label for="balance" class="txt-label">Balance</label>
+        <input type="number" name="balance" id="balance"  placeholder="0" min="0" required>
+        <br>
+        <label for="description" class="txt-label">Description</label>
+        <input type="text" name="description" id="description" placeholder="eg. my bank account">
+      </form>
+      <footer>
+        <button id="close-Wallet-Btn">Close</button>
+        <button id="submit-wallet" form="create-wallet-form" type="submit">Create Wallet</button>
+      </footer>
+    </div>
+  </div>
+  <div id="wallet-view">
+    <h1 >Wallet Balance : <span id="wallet-balance"></span> </h1>
+    <form action="" id="add-Transaction">
+      <div>
+        <label for="name">Make a transaction: </label>
+        <br>
+        <input type="number" id="amount" name="amount" required>
+      </div>
+      <span>
+        <input type="radio" value="+" name="income-expense" id="income">
+        <label for="income" id="green-label">Income</label>
 
-      <label for="currency-options" class="txt-label">Currency</label>
-      <span id="currency-options" style="display: inline-block;"></span>
+        <input type="radio" value="-" name="income-expense" id="expense">
+        <label for="expense" id="red-label">Expense</label>
+      </span>
 
+​
       <br>
-      <label for="balance" class="txt-label">Balance</label>
-      <input type="number" name="balance" id="balance"  placeholder="0" min="0">
-      <br>
-      <label for="description" class="txt-label">Description</label>
-      <input type="text" name="description" id="description" placeholder="eg. my bank account">
+      <div>
+        <label for="notes">Transanction Note</label>
+        <input type="text" id="notes" name="notes">
+      </div>
+      <div class="tags">
+        <label for="tags">Transanction Tags:</label>
+        <input type="text" id="tags" name="tags">
+      </div>
+​
+      <input type="submit" value="Add Transaction" id="submit">
     </form>
-    <footer>
-      <button id="close-Wallet-Btn">Close</button>
-      <button id="submit-wallet">Creat Wallet</button>
-    </footer>
+    <ul id="history-list"></ul>
   </div>
   <script src="./index.js"></script>
 </body>
