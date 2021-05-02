@@ -270,6 +270,9 @@ const createWallet = () => {
         if (transAmount.value == "") {
             alert("Please enter an amount to transact!")
         } else {
+            const allowedBalance = document.getElementById("allowedBalance");
+            allowedBalance.innerHTML = walletList.allWallets()[accountNames.value - 1].balance;
+
             let today = new Date();
             let dateTimeNow = "Date: " + today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear() + " | Time: " + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
             listOfTransactions.addTransaction(accountNames.value, transAmount.value, income, transNotes.value, transTags.value, dateTimeNow);
