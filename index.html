@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./style.css">
+  <title>Document</title>
+</head>
+<body>
+  <div id="main-header">
+    <h3>Wallet App</h3>
+    <select name="" class="user-wallet" id="select-wallet" hidden></select>
+  </div>
+  <div id="no-wallet-view">
+    <img src="./ghost.jpg" alt="">
+    <h3 class="error">Ooops!</h3>
+    <p>You have no wallets. Start by making one</p>
+    <button id="create-wallet-Btn">Create Wallet</button>
+  </div>
+
+​
+  <div id="pop-After">
+    <div id="pop-up">
+      <header class="pop-header">
+        <p>Create new wallet</p>
+        <span>&times;</span>
+      </header>
+​
+      <form id="create-wallet-form">
+        <label for="name" class="txt-label">Name</label>
+        <input type="text" name="name" id="name" placeholder="John Doe" required>
+        <br>
+
+        <label for="curr" class="txt-label">currency</label>
+        <div id="radio">
+          <input type="radio"  name="currency" value="$">
+          <label for="curr">US Dollars ($)</label>
+          <input type="radio"  name="currency" value="IQD">
+          <label for="curr">Iraqi Dinars (IQD)</label>
+        </div>
+        <br>
+        <label for="balance" class="txt-label">Balance</label>
+        <input type="number" name="balance" id="balance"  placeholder="0" min="0" required>
+        <br>
+        <label for="description" class="txt-label">Description</label>
+        <input type="text" name="description" id="description" placeholder="eg. my bank account">
+      </form>
+      <footer>
+        <button id="close-Wallet-Btn">Close</button>
+        <button id="submit-wallet" form="create-wallet-form" type="submit">Create Wallet</button>
+      </footer>
+    </div>
+  </div>
+  <div id="wallet-view">
+    <h1 >Wallet Balance : <span id="wallet-balance"></span> </h1>
+    <form action="" id="add-Transaction">
+      <div>
+        <label for="name">Make a transaction: </label>
+        <br>
+        <input type="number" id="amount" name="amount" required>
+      </div>
+      <span>
+        <input type="radio" value="+" name="income-expense" id="income">
+        <label for="income" id="green-label">Income</label>
+
+        <input type="radio" value="-" name="income-expense" id="expense">
+        <label for="expense" id="red-label">Expense</label>
+      </span>
+
+​
+      <br>
+      <div>
+        <label for="notes">Transanction Note</label>
+        <input type="text" id="notes" name="notes">
+      </div>
+      <div class="tags">
+        <label for="tags">Transanction Tags:</label>
+        <input type="text" id="tags" name="tags">
+      </div>
+​
+      <input type="submit" value="Add Transaction" id="submit">
+    </form>
+    <ul id="history-list"></ul>
+  </div>
+  <script src="./index.js"></script>
+</body>
+</html>
