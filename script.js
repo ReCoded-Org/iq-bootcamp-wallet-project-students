@@ -267,12 +267,10 @@ const createWallet = () => {
 
     // Transaction Function
     const makeTransaction = () => {
+
         if (transAmount.value == "") {
             alert("Please enter an amount to transact!")
         } else {
-            const allowedBalance = document.getElementById("allowedBalance");
-            allowedBalance.innerHTML = walletList.allWallets()[accountNames.value - 1].balance;
-
             let today = new Date();
             let dateTimeNow = "Date: " + today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear() + " | Time: " + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
             listOfTransactions.addTransaction(accountNames.value, transAmount.value, income, transNotes.value, transTags.value, dateTimeNow);
@@ -295,6 +293,9 @@ const createWallet = () => {
                     walletBalance.innerHTML = walletList.allWallets()[accountNames.value - 1].name + "'s Wallet Balance: " + walletList.allWallets()[accountNames.value - 1].balance + " " + walletList.allWallets()[accountNames.value - 1].currency;
                 }
             }
+            const allowedBalance = document.getElementById("allowedBalance");
+            allowedBalance.innerHTML = walletList.allWallets()[accountNames.value - 1].balance;
+
             if (parseInt(transAmount.value) <= balanceInt) {
                 const listItemDiv = document.createElement("div");
                 listItemDiv.setAttribute("class", "listItem");
