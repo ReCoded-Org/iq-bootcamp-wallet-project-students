@@ -79,35 +79,9 @@ class Transactions {
     }
 }
 
-// class Expense {
-//     constructor(amount) {
-//         this.amount = amount;
-//     }
-//     returnIncome() {
-//         return this.amount;
-//     }
-// }
-
-// class Income {
-//     constructor(amount) {
-//         this.amount = amount;
-//     }
-//     returnIncome() {
-//         return this.amount;
-//     }
-// }
-
-// class Currency {
-//     constructor(type) {
-//         this.type = type;
-//     }
-//     returnType() {
-//         return this.type;
-//     }
-// }
-
 let walletList = new Wallets();
 
+const accountNames = document.getElementById("accountNames")
 const modalCreateButton = document.getElementById("modalCreateButton")
 const nameInput = document.getElementById("nameInput");
 const USDollar = document.getElementById("USDollar");
@@ -131,19 +105,42 @@ function currencyDinar() {
 }
 
 const createWallet = () => {
-    if (nameInput.value == "" || balanceInput.value == "") {
+
+    // To check for duplicy
+    let duplicate = false;
+    walletList.allWallets().forEach(wallet => {
+        if (nameInput.value == wallet.name) duplicate = true;
+    });
+
+    if (duplicate == true) {
+        alert("Account Already Exists!");
+        duplicate = false;
+    } else if (nameInput.value == "" || balanceInput.value == "") {
         alert("Please provide Name and Balance!");
     } else {
+
         walletList.addWallet(nameInput.value, currency, balanceInput.value, descriptionInput.value);
 
         console.log(walletList.allWallets());
 
+        // Selector Options
+        let walletNumber = walletList.allWallets().length;
+        const newOption = document.createElement("option");
+        newOption.innerHTML = walletList.allWallets()[walletNumber - 1].name;
+        newOption.setAttribute("value", walletNumber);
+        newOption.setAttribute("selected", "selected");
+        accountNames.append(newOption);
+        accountNames.style.display = "block";
         modal.style.visibility = 'hidden';
         mainPage.style.display = "none";
+
         walletPage.innerHTML = "";
+        nameInput.value = "";
+        balanceInput.value = "";
+        descriptionInput.value = "";
 
         const walletHeader = document.createElement("h1");
-        walletHeader.innerHTML = "Wallet Balance: " + balanceInput.value + " " + currency;
+        walletHeader.innerHTML = walletList.allWallets()[walletNumber - 1].name + "'s Wallet Balance: " + walletList.allWallets()[walletNumber - 1].balance + " " + walletList.allWallets()[walletNumber - 1].currency;
         walletHeader.setAttribute("id", "walletBalance");
         walletPage.append(walletHeader);
 
@@ -162,10 +159,10 @@ const createWallet = () => {
         const amountInput = document.createElement("input");
         amountInput.setAttribute("type", "number");
         const currencySpan = document.createElement("span");
-        currencySpan.innerHTML = currency;
+        currencySpan.innerHTML = walletList.allWallets()[walletNumber - 1].currency;
         currencySpan.setAttribute("class", "amountSpan");
         const amountSpan = document.createElement("span");
-        amountSpan.innerHTML = balanceInput.value;
+        amountSpan.innerHTML = walletList.allWallets()[walletNumber - 1].balance;
         amountSpan.setAttribute("class", "amountSpan");
 
         transactionAmountDiv.append(amountLabel);
@@ -204,13 +201,21 @@ const createWallet = () => {
         transactionButtons.setAttribute("id", "transactionButtons");
         const incomeSpan = document.createElement("span");
         incomeSpan.innerHTML = "Income";
+        incomeSpan.setAttribute("id", "incomeTrans")
+
         const expenseSpan = document.createElement("span");
         expenseSpan.innerHTML = "Expense";
+        expenseSpan.setAttribute("id", "expenseTrans")
+
+        const breaking = document.createElement("br");
+
         const addButton = document.createElement("button");
         addButton.innerHTML = "Add Transaction";
+        addButton.setAttribute("id", "addTrans")
 
         transactionButtons.append(incomeSpan);
         transactionButtons.append(expenseSpan);
+        transactionButtons.append(breaking);
         transactionButtons.append(addButton);
 
         transactionSection.append(transactionButtons);
@@ -219,3 +224,8 @@ const createWallet = () => {
     }
 }
 modalCreateButton.addEventListener("click", createWallet);
+
+const selectorChange = () => {
+    console.log("CHANGED!");
+}
+accountNames.addEventListener("change", selectorChange);

@@ -13,10 +13,7 @@
     <nav>
         <h1>Wallet App</h1>
         <select id="accountNames">
-            <option value="volvo">Ahmed Mohammed Hassan</option>
-            <option value="saab">Saab</option>
-            <option value="mercedes">Mercedes</option>
-            <option id="selectorCreateButton">Create</option>
+            <option value="-1" id="selectorCreateButton">Create New Account</option>
         </select>
     </nav>
     <div>
@@ -27,31 +24,8 @@
             <button id="mainCreateButton" type="button">Create Wallet</button>
         </div>
 
-        <div id="walletPage">
-            <!-- <h1 id="walletBalance">Wallet Balance: </h1>
-            <div id="transactionSection">
-                <div id="transactionInputs">
-                    <div>
-                        <label>Make a Transaction:</label><br>
-                        <input type="number"><span>$</span><span>19000</span>
-                    </div>
-                    <br>
-                    <div>
-                        <label>Transaction Notes:</label><br>
-                        <input type="text">
-                    </div>
-                    <br>
-                    <div>
-                        <label>Transaction Tags:</label><br>
-                        <input type="text">
-                    </div>
-                </div>
-                <div id="transactionButtons">
-                    <span id="incomeTrans">Income</span><span id="expenseTrans">Expense</span><br>
-                    <button id="addTransaction">Add Transaction</button>
-                </div>
-            </div> -->
-        </div>
+        <div id="walletPage"></div>
+
         <div id="transactionList">
             <!-- <div class="listItem">
                 <div>
