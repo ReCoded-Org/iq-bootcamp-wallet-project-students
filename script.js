@@ -57,10 +57,13 @@ class Wallets {
 }
 
 class Transaction {
-    constructor(title, notes, tags) {
-        this.title = title;
+    constructor(id, amount, type, notes, tags, dateTime) {
+        this.id = id;
+        this.amount = amount;
+        this.type = type;
         this.notes = notes;
         this.tags = tags;
+        this.dateTime = dateTime;
     }
 }
 
@@ -73,8 +76,8 @@ class Transactions {
         return this.transactions;
     }
 
-    addTransaction(title, notes, tags) {
-        let newTransaction = new Transaction(title, notes, tags);
+    addTransaction(id, amount, type, notes, tags, dateTime) {
+        let newTransaction = new Transaction(id, amount, type, notes, tags, dateTime);
         this.transactions.push(newTransaction);
     }
 }
@@ -90,7 +93,6 @@ const balanceInput = document.getElementById("balanceInput");
 const descriptionInput = document.getElementById("descriptionInput");
 const mainPage = document.getElementById("mainPage");
 const walletPage = document.getElementById("walletPage");
-const transactionList = document.getElementById("transactionList");
 
 let currency = "USD";
 USDollar.addEventListener("click", currencyDollar);
@@ -118,6 +120,7 @@ const createWallet = () => {
     } else if (nameInput.value == "" || balanceInput.value == "") {
         alert("Please provide Name and Balance!");
     } else {
+        const transactionList = document.getElementById("transactionList");
 
         walletList.addWallet(nameInput.value, currency, balanceInput.value, descriptionInput.value);
 
@@ -130,11 +133,13 @@ const createWallet = () => {
         newOption.setAttribute("value", walletNumber);
         newOption.setAttribute("selected", "selected");
         accountNames.append(newOption);
+
         accountNames.style.display = "block";
         modal.style.visibility = 'hidden';
         mainPage.style.display = "none";
 
         walletPage.innerHTML = "";
+        transactionList.innerHTML = "";
         nameInput.value = "";
         balanceInput.value = "";
         descriptionInput.value = "";
@@ -154,16 +159,21 @@ const createWallet = () => {
 
         const transactionAmountDiv = document.createElement("div");
         transactionAmountDiv.style.marginBottom = "20px";
+
         const amountLabel = document.createElement("label");
         amountLabel.innerHTML = "Make a Transaction:";
         const amountInput = document.createElement("input");
         amountInput.setAttribute("type", "number");
+        amountInput.setAttribute("id", "transAmount");
+
         const currencySpan = document.createElement("span");
         currencySpan.innerHTML = walletList.allWallets()[walletNumber - 1].currency;
         currencySpan.setAttribute("class", "amountSpan");
+
         const amountSpan = document.createElement("span");
         amountSpan.innerHTML = walletList.allWallets()[walletNumber - 1].balance;
         amountSpan.setAttribute("class", "amountSpan");
+        amountSpan.setAttribute("id", "allowedBalance");
 
         transactionAmountDiv.append(amountLabel);
         transactionAmountDiv.append(amountInput);
@@ -172,20 +182,24 @@ const createWallet = () => {
 
         const transactionNotesDiv = document.createElement("div");
         transactionNotesDiv.style.marginBottom = "20px";
+
         const NotesLabel = document.createElement("label");
         NotesLabel.innerHTML = "Transaction Notes:";
         const notesInput = document.createElement("input");
         notesInput.setAttribute("type", "text");
+        notesInput.setAttribute("id", "transNotes");
 
         transactionNotesDiv.append(NotesLabel);
         transactionNotesDiv.append(notesInput);
 
         const transactionTagsDiv = document.createElement("div");
         transactionTagsDiv.style.marginBottom = "20px";
+
         const tagsLabel = document.createElement("label");
         tagsLabel.innerHTML = "Transaction Tags:";
         const tagsInput = document.createElement("input");
         tagsInput.setAttribute("type", "text");
+        tagsInput.setAttribute("id", "transTags");
 
         transactionTagsDiv.append(tagsLabel);
         transactionTagsDiv.append(tagsInput);
@@ -201,7 +215,7 @@ const createWallet = () => {
         transactionButtons.setAttribute("id", "transactionButtons");
         const incomeSpan = document.createElement("span");
         incomeSpan.innerHTML = "Income";
-        incomeSpan.setAttribute("id", "incomeTrans")
+        incomeSpan.setAttribute("id", "incomeTrans");
 
         const expenseSpan = document.createElement("span");
         expenseSpan.innerHTML = "Expense";
@@ -222,10 +236,145 @@ const createWallet = () => {
 
         walletPage.append(transactionSection);
     }
+
+
+    const transAmount = document.getElementById("transAmount");
+    const transNotes = document.getElementById("transNotes");
+    const transTags = document.getElementById("transTags");
+    const addTrans = document.getElementById("addTrans");
+
+    const incomeTrans = document.getElementById("incomeTrans");
+    const expenseTrans = document.getElementById("expenseTrans");
+    let income = true;
+
+    const incomeSelect = () => {
+        incomeTrans.style.backgroundColor = "lightgreen";
+        incomeTrans.style.color = "white";
+        income = true;
+        expenseTrans.style.backgroundColor = "white";
+        expenseTrans.style.color = "red";
+    }
+    incomeTrans.addEventListener("click", incomeSelect);
+
+    const expenseSelect = () => {
+        expenseTrans.style.backgroundColor = "orangered";
+        expenseTrans.style.color = "white";
+        income = false;
+        incomeTrans.style.backgroundColor = "white";
+        incomeTrans.style.color = "green";
+    }
+    expenseTrans.addEventListener("click", expenseSelect);
+
+    // Transaction Function
+    const makeTransaction = () => {
+        if (transAmount.value == "") {
+            alert("Please enter an amount to transact!")
+        } else {
+            let today = new Date();
+            let dateTimeNow = "Date: " + today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear() + " | Time: " + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            listOfTransactions.addTransaction(accountNames.value, transAmount.value, income, transNotes.value, transTags.value, dateTimeNow);
+
+            console.log(listOfTransactions.allTransactions());
+
+            const walletBalance = document.getElementById("walletBalance");
+            let balanceInt = parseInt(walletList.allWallets()[accountNames.value - 1].balance);
+            if (income == true) {
+                let balanceInt = parseInt(walletList.allWallets()[accountNames.value - 1].balance);
+                balanceInt += parseInt(transAmount.value);
+                walletList.allWallets()[accountNames.value - 1].balance = balanceInt;
+                walletBalance.innerHTML = walletList.allWallets()[accountNames.value - 1].name + "'s Wallet Balance: " + walletList.allWallets()[accountNames.value - 1].balance + " " + walletList.allWallets()[accountNames.value - 1].currency;
+            } else {
+                if (parseInt(transAmount.value) > balanceInt) {
+                    alert("You don't have enough balance for the transaction");
+                } else {
+                    balanceInt -= parseInt(transAmount.value);
+                    walletList.allWallets()[accountNames.value - 1].balance = balanceInt;
+                    walletBalance.innerHTML = walletList.allWallets()[accountNames.value - 1].name + "'s Wallet Balance: " + walletList.allWallets()[accountNames.value - 1].balance + " " + walletList.allWallets()[accountNames.value - 1].currency;
+                }
+            }
+            if (parseInt(transAmount.value) <= balanceInt) {
+                const listItemDiv = document.createElement("div");
+                listItemDiv.setAttribute("class", "listItem");
+
+                const itemDiv = document.createElement("div");
+
+                const amount = document.createElement("h1");
+                amount.innerHTML = transAmount.value;
+                if (income == true) amount.style.color = "green";
+                else amount.style.color = "red";
+
+                const notes = document.createElement("p");
+                notes.innerHTML = transNotes.value;
+
+                const tags = document.createElement("p");
+                tags.innerHTML = transTags.value;
+                tags.setAttribute("class", "tags");
+
+                const dateTime = document.createElement("p");
+                dateTime.innerHTML = dateTimeNow;
+
+                itemDiv.append(amount);
+                itemDiv.append(notes);
+                itemDiv.append(tags);
+
+                listItemDiv.append(itemDiv);
+                listItemDiv.append(dateTime);
+                transactionList.append(listItemDiv);
+            }
+        }
+    }
+    addTrans.addEventListener("click", makeTransaction);
+
+    const selectorChange = () => {
+        if (accountNames.value != -1) {
+            const allowedBalance = document.getElementById("allowedBalance");
+            allowedBalance.innerHTML = walletList.allWallets()[accountNames.value - 1].balance;
+            const walletBalance = document.getElementById("walletBalance");
+            const transAmount = document.getElementById("transAmount");
+            const transNotes = document.getElementById("transNotes");
+            const transTags = document.getElementById("transTags");
+
+            walletBalance.innerHTML = walletList.allWallets()[accountNames.value - 1].name + "'s Wallet Balance: " + walletList.allWallets()[accountNames.value - 1].balance + " " + walletList.allWallets()[accountNames.value - 1].currency;
+            transAmount.value = "";
+            transNotes.value = "";
+            transTags.value = "";
+
+            transactionList.innerHTML = "";
+            let id = accountNames.value;
+            listOfTransactions.allTransactions().forEach(transaction => {
+                if (transaction.id == id) {
+                    const listItemDiv = document.createElement("div");
+                    listItemDiv.setAttribute("class", "listItem");
+
+                    const itemDiv = document.createElement("div");
+
+                    const amount = document.createElement("h1");
+                    amount.innerHTML = transaction.amount;
+                    if (transaction.type == true) amount.style.color = "green";
+                    else amount.style.color = "red";
+
+                    const notes = document.createElement("p");
+                    notes.innerHTML = transaction.notes;
+
+                    const tags = document.createElement("p");
+                    tags.innerHTML = transaction.tags;
+
+                    const dateTime = document.createElement("p");
+                    dateTime.innerHTML = transaction.dateTime;
+
+                    itemDiv.append(amount);
+                    itemDiv.append(notes);
+                    itemDiv.append(tags);
+
+                    listItemDiv.append(itemDiv);
+                    listItemDiv.append(dateTime);
+                    transactionList.append(listItemDiv);
+                }
+            });
+        }
+    }
+    accountNames.addEventListener("change", selectorChange);
 }
 modalCreateButton.addEventListener("click", createWallet);
 
-const selectorChange = () => {
-    console.log("CHANGED!");
-}
-accountNames.addEventListener("change", selectorChange);
+let listOfTransactions = new Transactions();

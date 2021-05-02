@@ -187,8 +187,11 @@ div>input {
     width: 100px;
     height: 20px;
     padding: 20px 2px 20px 2px;
-    border: solid 2px grey;
+    border: solid 2px green;
+    color: white;
+    background-color: lightgreen;
     border-radius: 10px 0px 0px 0px;
+    background-color: ;
 }
 
 #expenseTrans {
@@ -196,13 +199,13 @@ div>input {
     width: 100px;
     height: 20px;
     padding: 20px 2px 20px 2px;
-    border: solid 2px grey;
-    border-left: none;
+    border: solid 2px red;
+    color: red;
     border-radius: 0px 10px 0px 0px;
 }
 
 #addTrans {
-    width: 213px;
+    width: 215px;
     height: 50px;
     background-color: #353a40;
     color: white;
@@ -214,8 +217,13 @@ div>input {
 .listItem {
     display: flex;
     justify-content: space-between;
+    border-bottom: 1px grey solid;
 }
 
-.hidden {
-    display: none;
+.tags {
+    background-color: grey;
+    color: white;
+    border: 1px solid black;
+    border-radius: 2px;
+    padding: 2px;
 }
